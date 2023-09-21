@@ -52,11 +52,13 @@ public class EventController {
         return ResponseEntity.ok().body(result);
     }
 
-    @GetMapping(value = "/export/excel", produces= MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    @GetMapping(value = "/export/excel", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
     public ResponseEntity<Object> downloadExcel() {
         String username = authenticationService.getUsername();
         byte[] result = eventController.downloadExcel();
-        return ResponseEntity.ok().body(result);
+        return ResponseEntity.ok()
+                .header("Content-Disposition", "attachment; filename=exported_data.xlsx")
+                .body(result);
     }
 
     @PutMapping("/update/{id}/{status}")

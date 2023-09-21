@@ -71,7 +71,9 @@ public class TicketController {
     public ResponseEntity<Object> downloadExcel() {
         String username = authenticationService.getUsername();
         byte[] result = ticketController.downloadExcel();
-        return ResponseEntity.ok().body(result);
+        return ResponseEntity.ok()
+                .header("Content-Disposition", "attachment; filename=exported_data.xlsx")
+                .body(result);
     }
 
     @GetMapping("/getBy/eventName/{eventName}")

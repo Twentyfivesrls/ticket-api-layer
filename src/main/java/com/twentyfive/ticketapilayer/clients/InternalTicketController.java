@@ -4,6 +4,7 @@ import com.twentyfive.twentyfivemodel.filterTicket.TicketFilter;
 import com.twentyfive.twentyfivemodel.models.ticketModels.Ticket;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.data.domain.Page;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,7 +34,7 @@ public interface InternalTicketController {
     @RequestMapping(method = RequestMethod.DELETE, value="/delete/{id}")
     Ticket deleteTicket(@PathVariable String id);
 
-    @RequestMapping(method = RequestMethod.GET, value="/export/excel")
+    @RequestMapping(method = RequestMethod.GET, value="/export/excel", produces= MediaType.APPLICATION_OCTET_STREAM_VALUE)
     byte[] downloadExcel();
 
     @RequestMapping(method = RequestMethod.GET, value="/getBy/eventName/{eventName}")
