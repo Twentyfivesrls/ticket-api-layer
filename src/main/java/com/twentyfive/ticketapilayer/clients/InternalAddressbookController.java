@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@FeignClient(name = "InternalAddressbookController", url = "http://tomcat-twentyfive-db:8091/twentyfive-db/addreebook")
+@FeignClient(name = "InternalAddressbookController", url = "http://tomcat-twentyfive-db:8091/twentyfive-db/addressbook")
 public interface InternalAddressbookController {
 
     @RequestMapping(method = RequestMethod.DELETE, value="/delete/{id}")
