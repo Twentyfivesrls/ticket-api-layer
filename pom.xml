@@ -62,6 +62,14 @@
 
     </dependencies>
 
+    <repositories>
+        <repository>
+            <id>github</id>
+            <name>GitHub Twentyfivesrls Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/Twentyfivesrls/*</url>
+        </repository>
+    </repositories>
+
     <build>
         <finalName>ticket-api-layer</finalName>
         <plugins>
