@@ -28,6 +28,7 @@ public class TicketController {
     @PostMapping("/generate/{name}/{lastName}/{dateOfBirth}")
     public ResponseEntity<Object> generateTicket(@RequestBody Ticket ticket, @PathVariable String name, @PathVariable String lastName, @PathVariable LocalDateTime dateOfBirth) {
         String username = authenticationService.getUsername();
+        ticket.setUserId(username);
         Ticket result = ticketController.generateTicket(ticket, name, lastName, dateOfBirth);
         return ResponseEntity.ok().body(result);
     }
