@@ -57,7 +57,7 @@
         <dependency>
             <groupId>com.twentyfive</groupId>
             <artifactId>twentyfive-models</artifactId>
-            <version>0.0.12</version>
+            <version>0.0.13</version>
         </dependency>
 
     </dependencies>
