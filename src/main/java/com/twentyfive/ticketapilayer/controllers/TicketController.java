@@ -10,7 +10,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.stream.EventFilter;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -25,8 +24,11 @@ public class TicketController {
     @Autowired
     private AuthenticationService authenticationService;
 
-    @PostMapping("/generate/{name}/{lastName}/{dateOfBirth}")
-    public ResponseEntity<Object> generateTicket(@RequestBody Ticket ticket, @PathVariable String name, @PathVariable String lastName, @PathVariable LocalDateTime dateOfBirth) {
+    @PostMapping("/generate")
+    public ResponseEntity<Object> generateTicket(@RequestBody Ticket ticket,
+                                                 @RequestParam("name") String name,
+                                                 @RequestParam("lastName") String lastName,
+                                                 @RequestParam("dateOfBirth") LocalDateTime dateOfBirth) {
         String username = authenticationService.getUsername();
         ticket.setUserId(username);
         Ticket result = ticketController.generateTicket(ticket, name, lastName, dateOfBirth);
@@ -68,7 +70,7 @@ public class TicketController {
         return ResponseEntity.ok().body(result);
     }
 
-    @GetMapping(value="/export/excel", produces= MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    @GetMapping(value = "/export/excel", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
     public ResponseEntity<Object> downloadExcel() {
         String username = authenticationService.getUsername();
         byte[] result = ticketController.downloadExcel();

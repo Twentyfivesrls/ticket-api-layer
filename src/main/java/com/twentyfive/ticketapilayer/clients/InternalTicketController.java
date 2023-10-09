@@ -5,10 +5,7 @@ import com.twentyfive.twentyfivemodel.models.ticketModels.Ticket;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,8 +13,11 @@ import java.util.List;
 @FeignClient(name = "InternalTicketController", url = "http://tomcat-twentyfive-db:8091/twentyfive-db/ticket")
 public interface InternalTicketController {
 
-    @RequestMapping(method = RequestMethod.POST, value="/generate/{name}/{lastName}/{dateOfBirth}")
-    Ticket generateTicket(@RequestBody Ticket ticket, @PathVariable String name, @PathVariable String lastName, @PathVariable LocalDateTime dateOfBirth);
+    @RequestMapping(method = RequestMethod.POST, value="/generate")
+    Ticket generateTicket(@RequestBody Ticket ticket,
+                          @RequestParam("name") String name,
+                          @RequestParam("lastName") String lastName,
+                          @RequestParam("dateOfBirth") LocalDateTime dateOfBirth);
 
     @RequestMapping(method = RequestMethod.POST, value="/list")
     Page<Ticket> getTicketList(@RequestBody TicketFilter ticket);
