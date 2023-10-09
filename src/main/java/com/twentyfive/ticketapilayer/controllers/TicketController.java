@@ -24,10 +24,10 @@ public class TicketController {
     @Autowired
     private AuthenticationService authenticationService;
 
-    @PostMapping("/generate/{dateOfBirth}")
+    @PostMapping("/generate/{name}/{lastName}/{dateOfBirth}")
     public ResponseEntity<Object> generateTicket(@RequestBody Ticket ticket,
-                                                 @RequestParam("name") String name,
-                                                 @RequestParam("lastName") String lastName,
+                                                 @PathVariable String name,
+                                                 @PathVariable String lastName,
                                                  @PathVariable LocalDateTime dateOfBirth) {
         String username = authenticationService.getUsername();
         ticket.setUserId(username);
