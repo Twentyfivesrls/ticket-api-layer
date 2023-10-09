@@ -13,11 +13,11 @@ import java.util.List;
 @FeignClient(name = "InternalTicketController", url = "http://tomcat-twentyfive-db:8091/twentyfive-db/ticket")
 public interface InternalTicketController {
 
-    @RequestMapping(method = RequestMethod.POST, value="/generate")
+    @RequestMapping(method = RequestMethod.POST, value="/generate/{dateOfBirth}")
     Ticket generateTicket(@RequestBody Ticket ticket,
                           @RequestParam("name") String name,
                           @RequestParam("lastName") String lastName,
-                          @RequestParam("dateOfBirth") LocalDateTime dateOfBirth);
+                          @PathVariable LocalDateTime dateOfBirth);
 
     @RequestMapping(method = RequestMethod.POST, value="/list")
     Page<Ticket> getTicketList(@RequestBody TicketFilter ticket);
