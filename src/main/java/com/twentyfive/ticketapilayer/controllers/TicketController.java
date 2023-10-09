@@ -6,6 +6,7 @@ import com.twentyfive.twentyfivemodel.filterTicket.TicketFilter;
 import com.twentyfive.twentyfivemodel.models.ticketModels.Ticket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +29,7 @@ public class TicketController {
     public ResponseEntity<Object> generateTicket(@RequestBody Ticket ticket,
                                                  @PathVariable String name,
                                                  @PathVariable String lastName,
-                                                 @PathVariable LocalDateTime dateOfBirth) {
+                                                 @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDateTime dateOfBirth) {
         String username = authenticationService.getUsername();
         ticket.setUserId(username);
         Ticket result = ticketController.generateTicket(ticket, name, lastName, dateOfBirth);

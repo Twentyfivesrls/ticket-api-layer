@@ -4,6 +4,7 @@ import com.twentyfive.twentyfivemodel.filterTicket.TicketFilter;
 import com.twentyfive.twentyfivemodel.models.ticketModels.Ticket;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.data.domain.Page;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +18,7 @@ public interface InternalTicketController {
     Ticket generateTicket(@RequestBody Ticket ticket,
                           @PathVariable String name,
                           @PathVariable String lastName,
-                          @PathVariable LocalDateTime dateOfBirth);
+                          @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDateTime dateOfBirth);
 
     @RequestMapping(method = RequestMethod.POST, value="/list")
     Page<Ticket> getTicketList(@RequestBody TicketFilter ticket);
