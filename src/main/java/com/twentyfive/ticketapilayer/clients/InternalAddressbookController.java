@@ -4,6 +4,7 @@ import com.twentyfive.twentyfivemodel.filterTicket.AddressBookFilter;
 import com.twentyfive.twentyfivemodel.models.ticketModels.AddressBook;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.data.domain.Page;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -25,7 +26,7 @@ public interface InternalAddressbookController {
     List<AddressBook> getByLastName(@PathVariable String lastName);
 
     @RequestMapping(method = RequestMethod.GET , value="/getBy/date/of/birth/{dateOfBirth}")
-    List<AddressBook> getByDateOfBirth(@PathVariable LocalDateTime dateOfBirth);
+    List<AddressBook> getByDateOfBirth(@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDateTime dateOfBirth);
 
     @RequestMapping(method = RequestMethod.POST , value="/list")
     Page<AddressBook> getAdressbookList(@RequestBody AddressBookFilter filter);

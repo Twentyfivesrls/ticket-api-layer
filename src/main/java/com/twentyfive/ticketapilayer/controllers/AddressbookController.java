@@ -6,6 +6,7 @@ import com.twentyfive.twentyfivemodel.filterTicket.AddressBookFilter;
 import com.twentyfive.twentyfivemodel.models.ticketModels.AddressBook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -53,7 +54,7 @@ public class AddressbookController {
     }
 
     @GetMapping("/getBy/date/of/birth/{dateOfBirth}")
-    public ResponseEntity<Object> getByDateOfBirth(@PathVariable LocalDateTime dateOfBirth) {
+    public ResponseEntity<Object> getByDateOfBirth(@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDateTime dateOfBirth) {
         String username = authenticationService.getUsername();
         List<AddressBook> result = addressbookController.getByDateOfBirth(dateOfBirth);
         return ResponseEntity.ok().body(result);
