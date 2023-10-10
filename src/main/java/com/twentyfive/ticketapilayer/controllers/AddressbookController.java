@@ -60,10 +60,10 @@ public class AddressbookController {
         return ResponseEntity.ok().body(result);
     }
 
-    @PostMapping("/list")
-    public ResponseEntity<Object> getAdressbookList(@RequestBody AddressBookFilter filter) {
+    @GetMapping("/list")
+    public ResponseEntity<Object> getAdressbookList() {
         String username = authenticationService.getUsername();
-        Page<AddressBook> result = addressbookController.getAdressbookList(filter);
+        Page<AddressBook> result = addressbookController.getAdressbookList();
         return ResponseEntity.ok().body(result);
     }
 
