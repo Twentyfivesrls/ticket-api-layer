@@ -25,14 +25,14 @@ public class TicketController {
     @Autowired
     private AuthenticationService authenticationService;
 
-    @PostMapping("/generate/{name}/{lastName}/{dateOfBirth}")
+    @PostMapping("/generate")
     public ResponseEntity<Object> generateTicket(@RequestBody Ticket ticket,
-                                                 @PathVariable String name,
-                                                 @PathVariable String lastName,
-                                                 @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDateTime dateOfBirth) {
+                                                 @RequestParam("name") String name,
+                                                 @RequestParam("lastName") String lastName,
+                                                 @RequestParam("email") String email) {
         String username = authenticationService.getUsername();
         ticket.setUserId(username);
-        Ticket result = ticketController.generateTicket(ticket, name, lastName, dateOfBirth);
+        Ticket result = ticketController.generateTicket(ticket, name, lastName, email);
         return ResponseEntity.ok().body(result);
     }
 
