@@ -53,10 +53,10 @@ public class AddressbookController {
         return ResponseEntity.ok().body(result);
     }
 
-    @GetMapping("/getBy/date/of/birth/{dateOfBirth}")
-    public ResponseEntity<Object> getByDateOfBirth(@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDateTime dateOfBirth) {
+    @GetMapping("/get/addressBook/by/email")
+    public ResponseEntity<Object> getByEmail(@RequestParam("email") String email) {
         String username = authenticationService.getUsername();
-        List<AddressBook> result = addressbookController.getByDateOfBirth(dateOfBirth);
+        List<AddressBook> result = addressbookController.getByEmail(email);
         return ResponseEntity.ok().body(result);
     }
 

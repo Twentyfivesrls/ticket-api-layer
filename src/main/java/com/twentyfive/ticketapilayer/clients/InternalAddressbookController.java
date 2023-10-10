@@ -25,8 +25,8 @@ public interface InternalAddressbookController {
     @RequestMapping(method = RequestMethod.GET , value="/getBy/last/name/{lastName}")
     List<AddressBook> getByLastName(@PathVariable String lastName);
 
-    @RequestMapping(method = RequestMethod.GET , value="/getBy/date/of/birth/{dateOfBirth}")
-    List<AddressBook> getByDateOfBirth(@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDateTime dateOfBirth);
+    @RequestMapping(method = RequestMethod.GET , value="/get/addressBook/by/email")
+    List<AddressBook> getByEmail(@RequestParam("email") String email);
 
     @RequestMapping(method = RequestMethod.POST , value="/list")
     Page<AddressBook> getAdressbookList(@RequestBody AddressBookFilter filter);
