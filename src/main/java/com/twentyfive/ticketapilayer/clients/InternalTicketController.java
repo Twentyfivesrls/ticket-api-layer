@@ -46,4 +46,7 @@ public interface InternalTicketController {
 
     @RequestMapping(method = RequestMethod.GET, value="/generate/qrCode/ticket/number/{ticketNumber}")
     byte[] getEventList(@PathVariable String ticketNumber);
+
+    @RequestMapping(method = RequestMethod.GET, value="/find/all")
+    List<Ticket> findAll();
 }

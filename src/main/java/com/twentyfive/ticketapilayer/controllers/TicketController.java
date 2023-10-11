@@ -101,4 +101,11 @@ public class TicketController {
         return ResponseEntity.ok().body(result);
     }
 
+    @GetMapping("/find/all")
+    public ResponseEntity<Object> findAll() {
+        String username = authenticationService.getUsername();
+        List<Ticket> result = ticketController.findAll();
+        return ResponseEntity.ok().body(result);
+    }
+
 }
