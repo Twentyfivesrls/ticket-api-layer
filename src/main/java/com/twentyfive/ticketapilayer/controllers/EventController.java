@@ -27,7 +27,9 @@ public class EventController {
 
     @PostMapping("/filter")
     public ResponseEntity<Object> filterEventList(@RequestBody EventFilter event, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size) {
+        System.out.println("sono nel controller");
         Page<Event> result = eventController.filterEventList(event, size, page);
+        System.out.println("STAMPO LA PAGE   " + result);
 
         return ResponseEntity.ok().body(result);
     }
