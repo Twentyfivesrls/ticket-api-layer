@@ -25,11 +25,12 @@ public class EventController {
     @Autowired
     private AuthenticationService authenticationService;
 
-    @PostMapping("/filter")
-    public ResponseEntity<Object> filterEventList(@RequestBody EventFilter event ){
+    @PostMapping("/filter/{page}/{size}")
+    public ResponseEntity<Object> filterEventList(@RequestBody EventFilter event, @PathVariable int page, @PathVariable int size){
         System.out.println("sono nel controller");
+
         String username = authenticationService.getUsername();
-        Page<Event> result = eventController.filterEventList(event, 0, 5);
+        Page<Event> result = eventController.filterEventList(event, page, size);
         System.out.println("STAMPO LA PAGE   " + result);
 
         return ResponseEntity.ok().body(result);
