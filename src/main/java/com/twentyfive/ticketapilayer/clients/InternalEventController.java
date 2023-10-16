@@ -1,12 +1,12 @@
 package com.twentyfive.ticketapilayer.clients;
 
+import com.twentyfive.twentyfivemodel.filterTicket.EventFilter;
 import com.twentyfive.twentyfivemodel.models.ticketModels.Event;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.stream.EventFilter;
 import java.util.List;
 
 @FeignClient(name = "InternalEventController", url = "http://tomcat-twentyfive-db:8091/twentyfive-db/event")

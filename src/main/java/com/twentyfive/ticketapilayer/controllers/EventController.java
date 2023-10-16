@@ -8,8 +8,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.twentyfive.twentyfivemodel.filterTicket.EventFilter;
 
-import javax.xml.stream.EventFilter;
+
 import java.util.List;
 
 @RestController
@@ -27,7 +28,7 @@ public class EventController {
     @PostMapping("/filter")
     public ResponseEntity<Object> filterEventList(@RequestBody EventFilter event, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size) {
         Page<Event> result = eventController.filterEventList(event, size, page);
-        System.out.println("SONO NEL CONTROLLER   " + result);
+
         return ResponseEntity.ok().body(result);
     }
 
