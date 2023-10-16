@@ -29,7 +29,7 @@ public interface InternalAddressbookController {
     List<AddressBook> getByEmail(@RequestParam("email") String email);
 
     @RequestMapping(method = RequestMethod.POST , value="/list")
-    Page<AddressBook> getAdressbookList(@RequestBody AddressBookFilter filter);
+    Page<AddressBook> getAdressbookList(@RequestBody AddressBookFilter filter, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size);
 
     @RequestMapping(method = RequestMethod.PUT , value="/update/{id}")
     AddressBook updateAddressBook(@PathVariable String id, @RequestBody AddressBook addressBook);
