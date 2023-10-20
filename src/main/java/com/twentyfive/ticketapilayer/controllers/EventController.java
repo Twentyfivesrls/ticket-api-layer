@@ -39,7 +39,7 @@ public class EventController {
     @GetMapping("/list")
     public ResponseEntity<Object> getEventList() {
         String username = authenticationService.getUsername();
-        List<Event> result = eventController.getEventList();
+        List<Event> result = eventController.getEventList(username);
         return ResponseEntity.ok().body(result);
     }
 

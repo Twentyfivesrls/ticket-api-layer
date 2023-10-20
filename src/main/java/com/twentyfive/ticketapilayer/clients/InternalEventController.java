@@ -16,7 +16,7 @@ public interface InternalEventController {
     Page<Event> filterEventList(@RequestBody EventFilter event, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size, @RequestParam("username") String username);
 
     @RequestMapping(method = RequestMethod.GET, value="/list")
-    List<Event> getEventList();
+    List<Event> getEventList(@RequestParam("username") String username);
 
     @RequestMapping(method = RequestMethod.POST, value="/save")
     Event saveEvent(@RequestBody Event event);
