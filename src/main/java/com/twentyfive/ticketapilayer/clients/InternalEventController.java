@@ -13,7 +13,7 @@ import java.util.List;
 public interface InternalEventController {
 
     @RequestMapping(method = RequestMethod.POST, value="/filter")
-    Page<Event> filterEventList(@RequestBody EventFilter event, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size);
+    Page<Event> filterEventList(@RequestBody EventFilter event, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size, @RequestParam("username") String username);
 
     @RequestMapping(method = RequestMethod.GET, value="/list")
     List<Event> getEventList();

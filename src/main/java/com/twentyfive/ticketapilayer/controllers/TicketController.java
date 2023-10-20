@@ -32,8 +32,6 @@ public class TicketController {
                                                  @RequestParam("email") String email) {
         String username = authenticationService.getUsername();
         ticket.setUserId(username);
-        System.out.println(username);
-        System.out.println("ticcket " + ticket );
         Ticket result = ticketController.generateTicket(ticket, name, lastName, email);
         return ResponseEntity.ok().body(result);
     }
