@@ -106,7 +106,7 @@ public class TicketController {
     @GetMapping("/find/all")
     public ResponseEntity<Object> findAll() {
         String username = authenticationService.getUsername();
-        List<Ticket> result = ticketController.findAll();
+        List<Ticket> result = ticketController.findAll(username);
         return ResponseEntity.ok().body(result);
     }
 

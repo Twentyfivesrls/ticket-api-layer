@@ -51,5 +51,5 @@ public interface InternalTicketController {
     byte[] getEventList(@PathVariable String ticketNumber);
 
     @RequestMapping(method = RequestMethod.GET, value="/find/all")
-    List<Ticket> findAll();
+    List<Ticket> findAll(@RequestParam("username") String username);
 }
