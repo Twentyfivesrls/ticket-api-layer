@@ -41,7 +41,7 @@ public class TicketController {
                                                 @RequestParam(defaultValue = "0") int page,
                                                 @RequestParam(defaultValue = "5") int size) {
         String username = authenticationService.getUsername();
-        Page<Ticket> result = ticketController.getTicketList(ticket, page, size);
+        Page<Ticket> result = ticketController.getTicketList(ticket, page, size, username);
         return ResponseEntity.ok().body(result);
     }
 
