@@ -31,7 +31,6 @@ public class EventController {
 
         String username = authenticationService.getUsername();
         Page<Event> result = eventController.filterEventList(event, page, sizeP, username);
-        System.out.println("STAMPO LA PAGE   " + result);
 
         return ResponseEntity.ok().body(result);
     }
