@@ -20,8 +20,8 @@ public interface InternalAddressbookController {
     @RequestMapping(method = RequestMethod.GET , value="/getById/{id}")
     AddressBook getById(@PathVariable String id);
 
-    @RequestMapping(method = RequestMethod.GET, value="/total-list")
-    List<AddressBook> getEAddressBookList(@RequestParam("username") String username);
+    //@RequestMapping(method = RequestMethod.GET, value="/total-list")
+    //List<AddressBook> getEAddressBookList(@RequestParam("username") String username);
 
     @RequestMapping(method = RequestMethod.GET , value="/getBy/firstName/{firstName}")
     List<AddressBook> getByFirstName(@PathVariable String firstName);
