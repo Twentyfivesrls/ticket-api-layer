@@ -4,6 +4,7 @@ import com.twentyfive.authorizationcontroller.services.AuthenticationService;
 import com.twentyfive.ticketapilayer.clients.InternalAddressbookController;
 import com.twentyfive.twentyfivemodel.filterTicket.AddressBookFilter;
 import com.twentyfive.twentyfivemodel.models.ticketModels.AddressBook;
+import com.twentyfive.twentyfivemodel.models.ticketModels.Event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -57,6 +58,13 @@ public class AddressbookController {
     public ResponseEntity<Object> getByEmail(@RequestParam("email") String email) {
         String username = authenticationService.getUsername();
         List<AddressBook> result = addressbookController.getByEmail(email);
+        return ResponseEntity.ok().body(result);
+    }
+
+    @GetMapping("/total-list")
+    public ResponseEntity<Object> getEventList() {
+        String username = authenticationService.getUsername();
+        List<AddressBook> result = addressbookController.getEAddressBookList(username);
         return ResponseEntity.ok().body(result);
     }
 

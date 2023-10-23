@@ -2,6 +2,7 @@ package com.twentyfive.ticketapilayer.clients;
 
 import com.twentyfive.twentyfivemodel.filterTicket.AddressBookFilter;
 import com.twentyfive.twentyfivemodel.models.ticketModels.AddressBook;
+import com.twentyfive.twentyfivemodel.models.ticketModels.Event;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -18,6 +19,9 @@ public interface InternalAddressbookController {
 
     @RequestMapping(method = RequestMethod.GET , value="/getById/{id}")
     AddressBook getById(@PathVariable String id);
+
+    @RequestMapping(method = RequestMethod.GET, value="/total-list")
+    List<AddressBook> getEAddressBookList(@RequestParam("username") String username);
 
     @RequestMapping(method = RequestMethod.GET , value="/getBy/firstName/{firstName}")
     List<AddressBook> getByFirstName(@PathVariable String firstName);
