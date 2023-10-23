@@ -18,7 +18,8 @@ public interface InternalTicketController {
     Ticket generateTicket(@RequestBody Ticket ticket,
                           @RequestParam("name") String name,
                           @RequestParam("lastName") String lastName,
-                          @RequestParam("email") String email);
+                          @RequestParam("email") String email,
+                          @RequestParam("username") String username);
 
     @RequestMapping(method = RequestMethod.POST, value="/list")
     Page<Ticket> getTicketList(@RequestBody TicketFilter ticket,
