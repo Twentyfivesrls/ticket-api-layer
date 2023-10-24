@@ -6,12 +6,10 @@ import com.twentyfive.twentyfivemodel.filterTicket.TicketFilter;
 import com.twentyfive.twentyfivemodel.models.ticketModels.Ticket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -45,10 +43,10 @@ public class TicketController {
         return ResponseEntity.ok().body(result);
     }
 
-    @GetMapping("/getTicketById/{id}")
-    public ResponseEntity<Object> getTicketById(@PathVariable String id) {
+    @GetMapping("/getTicketByCode/{code}")
+    public ResponseEntity<Object> getTicketByCode(@PathVariable String code) {
         String username = authenticationService.getUsername();
-        Ticket result = ticketController.getTicketById(id);
+        Ticket result = ticketController.getTicketByCode(code);
         return ResponseEntity.ok().body(result);
     }
 
@@ -66,10 +64,10 @@ public class TicketController {
         return ResponseEntity.ok().body(result);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Object> deleteTicket(@PathVariable String id) {
+    @DeleteMapping("/delete/{code}")
+    public ResponseEntity<Object> deleteTicket(@PathVariable String code) {
         String username = authenticationService.getUsername();
-        Ticket result = ticketController.deleteTicket(id);
+        Ticket result = ticketController.deleteTicket(code);
         return ResponseEntity.ok().body(result);
     }
 

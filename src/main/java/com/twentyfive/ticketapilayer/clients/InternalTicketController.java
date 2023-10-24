@@ -27,8 +27,8 @@ public interface InternalTicketController {
                                @RequestParam(defaultValue = "5") int size,
                                @RequestParam String username);
 
-    @RequestMapping(method = RequestMethod.GET, value="/getTicketById/{id}")
-    Ticket getTicketById(@PathVariable String id);
+    @RequestMapping(method = RequestMethod.GET, value="/getTicketByCode/{code}")
+    Ticket getTicketByCode(@PathVariable String code);
 
     @RequestMapping(method = RequestMethod.PUT, value="/setStatus/{id}/{status}")
     Ticket setStatus(@PathVariable String id, @PathVariable Boolean status);
@@ -36,8 +36,8 @@ public interface InternalTicketController {
     @RequestMapping(method = RequestMethod.PUT, value="/update/usedTicket/{id}/{used}")
     Ticket setUsed(@PathVariable String id, @PathVariable Boolean used);
 
-    @RequestMapping(method = RequestMethod.DELETE, value="/delete/{id}")
-    Ticket deleteTicket(@PathVariable String id);
+    @RequestMapping(method = RequestMethod.DELETE, value="/delete/{code}")
+    Ticket deleteTicket(@PathVariable String code);
 
     @RequestMapping(method = RequestMethod.GET, value="/export/excel", produces= MediaType.APPLICATION_OCTET_STREAM_VALUE)
     byte[] downloadExcel();
