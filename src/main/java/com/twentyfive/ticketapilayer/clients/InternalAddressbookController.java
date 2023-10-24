@@ -30,7 +30,7 @@ public interface InternalAddressbookController {
     List<AddressBook> getByLastName(@PathVariable String lastName);
 
     @RequestMapping(method = RequestMethod.GET , value="/get/addressBook/by/email")
-    List<AddressBook> getByEmail(@RequestParam("email") String email);
+    AddressBook getByEmail(@RequestParam("email") String email);
 
     @RequestMapping(method = RequestMethod.POST , value="/list")
     Page<AddressBook> getAdressbookList(@RequestBody AddressBookFilter filter, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size, @RequestParam("username") String username);
