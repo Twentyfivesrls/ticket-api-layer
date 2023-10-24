@@ -54,7 +54,7 @@ public class AddressbookController {
     @GetMapping("/get/addressBook/by/email")
     public ResponseEntity<Object> getByEmail(@RequestParam("email") String email) {
         String username = authenticationService.getUsername();
-        List<AddressBook> result = addressbookController.getByEmail(email);
+        AddressBook result = addressbookController.getByEmail(email);
         return ResponseEntity.ok().body(result);
     }
 
