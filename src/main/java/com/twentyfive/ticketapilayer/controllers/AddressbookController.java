@@ -23,10 +23,10 @@ public class AddressbookController {
     @Autowired
     private AuthenticationService authenticationService;
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Object> deleteAddressBook(@PathVariable String id) {
+    @DeleteMapping("/delete/{email}")
+    public ResponseEntity<Object> deleteAddressBook(@PathVariable String email) {
         String username = authenticationService.getUsername();
-        AddressBook result = addressbookController.deleteAddressBook(id);
+        AddressBook result = addressbookController.deleteAddressBook(email);
         return ResponseEntity.ok().body(result);
     }
 

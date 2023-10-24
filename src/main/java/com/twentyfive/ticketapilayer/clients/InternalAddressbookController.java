@@ -14,8 +14,8 @@ import java.util.List;
 @FeignClient(name = "InternalAddressbookController", url = "http://tomcat-twentyfive-db:8091/twentyfive-db/addressbook")
 public interface InternalAddressbookController {
 
-    @RequestMapping(method = RequestMethod.DELETE, value="/delete/{id}")
-    AddressBook deleteAddressBook(@PathVariable String id);
+    @RequestMapping(method = RequestMethod.DELETE, value="/delete/{email}")
+    AddressBook deleteAddressBook(@PathVariable String email);
 
     @RequestMapping(method = RequestMethod.GET , value="/getById/{id}")
     AddressBook getById(@PathVariable String id);
