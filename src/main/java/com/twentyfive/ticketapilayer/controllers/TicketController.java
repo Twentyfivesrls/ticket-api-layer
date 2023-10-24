@@ -43,7 +43,7 @@ public class TicketController {
         return ResponseEntity.ok().body(result);
     }
 
-    @GetMapping("/getTicketByCode/{code}")
+    @GetMapping("/getTicket/byCode/{code}")
     public ResponseEntity<Object> getTicketByCode(@PathVariable String code) {
         String username = authenticationService.getUsername();
         Ticket result = ticketController.getTicketByCode(code);

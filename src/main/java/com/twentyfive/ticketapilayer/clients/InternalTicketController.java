@@ -27,7 +27,7 @@ public interface InternalTicketController {
                                @RequestParam(defaultValue = "5") int size,
                                @RequestParam String username);
 
-    @RequestMapping(method = RequestMethod.GET, value="/getTicketByCode/{code}")
+    @RequestMapping(method = RequestMethod.GET, value="/getTicket/byCode/{code}")
     Ticket getTicketByCode(@PathVariable String code);
 
     @RequestMapping(method = RequestMethod.PUT, value="/setStatus/{id}/{status}")
