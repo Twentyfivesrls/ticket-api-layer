@@ -46,6 +46,7 @@ public class EventController {
     public ResponseEntity<Object> saveEvent(@RequestBody Event event) {
         String username = authenticationService.getUsername();
         event.setUserId(username);
+        event.setEnabled(true);
         Event result = eventController.saveEvent(event);
         return ResponseEntity.ok().body(result);
     }
