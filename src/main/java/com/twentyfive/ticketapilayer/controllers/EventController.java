@@ -104,6 +104,6 @@ public class EventController {
 
         Event result = eventController.getEventByField(name, description, dateTime, location, enabled);
 
-        return ResponseEntity.ok().body(null);
+        return ResponseEntity.ok().body(result);
     }
 }
