@@ -72,16 +72,17 @@ public class AddressbookController {
         return ResponseEntity.ok().body(result);
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Object> updateAddressBook(@PathVariable String id, @RequestBody AddressBook addressBook) {
-        String username = authenticationService.getUsername();
-        AddressBook result = addressbookController.updateAddressBook(id, addressBook);
+    @PutMapping("/update/{email}")
+    public ResponseEntity<Object> updateAddressBook(@PathVariable String email, @RequestBody AddressBook addressBook) {
+
+        AddressBook result = addressbookController.updateAddressBook(email, addressBook);
         return ResponseEntity.ok().body(result);
     }
 
     @PostMapping("/save/addressbook")
     public ResponseEntity<AddressBook> saveAddressbook(@RequestBody AddressBook addressBook){
         String username = authenticationService.getUsername();
+        addressBook.setUserId(username);
         AddressBook result = addressbookController.saveAddressbook(addressBook);
         return ResponseEntity.ok().body(result);
     }
