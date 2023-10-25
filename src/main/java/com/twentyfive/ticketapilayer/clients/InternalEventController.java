@@ -40,4 +40,7 @@ public interface InternalEventController {
     Event getEventByField(@RequestParam("name") String name, @RequestParam("description") String description, @RequestParam("date") @DateTimeFormat(pattern="dd/MM/yy, HH:mm") LocalDateTime date,
              @RequestParam("location") String location, @RequestParam("enabled") Boolean enabled);
 
+    @RequestMapping(method = RequestMethod.DELETE, value = "delete/{id}")
+    Event deleteEvent(@PathVariable String id);
+
 }

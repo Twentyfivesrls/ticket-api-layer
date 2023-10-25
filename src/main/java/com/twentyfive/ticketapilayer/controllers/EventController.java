@@ -106,4 +106,10 @@ public class EventController {
 
         return ResponseEntity.ok().body(result);
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Event> deleteEvent(@PathVariable String id){
+        eventController.deleteEvent(id);
+        return ResponseEntity.ok().build();
+    }
 }
