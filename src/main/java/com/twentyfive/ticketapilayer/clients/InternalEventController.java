@@ -27,8 +27,8 @@ public interface InternalEventController {
     Event getEventById(@PathVariable String id);
 
     //todo fix this
-    @RequestMapping(method = RequestMethod.GET, value="/export/excel")
-    byte[] downloadExcel();
+    @RequestMapping(method = RequestMethod.GET, value="/export/excel/{userId}")
+    byte[] downloadExcel(@PathVariable String userId);
 
     @RequestMapping(method = RequestMethod.PUT, value="/update/{id}/{status}")
     Event updateEvent(@PathVariable String id, @PathVariable Boolean status);

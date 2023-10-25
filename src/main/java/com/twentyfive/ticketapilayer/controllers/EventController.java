@@ -68,7 +68,7 @@ public class EventController {
     @GetMapping(value = "/export/excel", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
     public ResponseEntity<Object> downloadExcel() {
         String username = authenticationService.getUsername();
-        byte[] result = eventController.downloadExcel();
+        byte[] result = eventController.downloadExcel(username);
         return ResponseEntity.ok()
                 .header("Content-Disposition", "attachment; filename=exported_data.xlsx")
                 .body(result);

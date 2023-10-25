@@ -39,8 +39,8 @@ public interface InternalTicketController {
     @RequestMapping(method = RequestMethod.DELETE, value="/delete/{code}")
     Ticket deleteTicket(@PathVariable String code);
 
-    @RequestMapping(method = RequestMethod.GET, value="/export/excel", produces= MediaType.APPLICATION_OCTET_STREAM_VALUE)
-    byte[] downloadExcel();
+    @RequestMapping(method = RequestMethod.GET, value="/export/excel/{userId}", produces= MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    byte[] downloadExcel(@PathVariable String userId);
 
     @RequestMapping(method = RequestMethod.GET, value="/getBy/eventName/{eventName}")
     List<Ticket> getTicketByEventName(@PathVariable String eventName);
