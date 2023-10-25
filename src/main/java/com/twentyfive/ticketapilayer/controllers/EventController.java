@@ -13,7 +13,9 @@ import twentyfive.twentyfiveadapter.adapter.Document.TicketObjDocumentDB.EventDo
 import twentyfive.twentyfiveadapter.adapter.Mapper.TwentyFiveMapper;
 
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
@@ -85,8 +87,9 @@ public class EventController {
     }
 
     @GetMapping("/get/event/byFields")
-    public  ResponseEntity<Event> getEventByField(@RequestParam("name") String name, @RequestParam("description") String description, @RequestParam("date") LocalDateTime date, @RequestParam("location") String location, @RequestParam("enabled") Boolean enabled){
-      Event result = eventController.getEventByField(name, description, date, location, enabled);
+    public  ResponseEntity<Event> getEventByField(@RequestParam("name") String name, @RequestParam("description") String description, @RequestParam("date") String date, @RequestParam("location") String location, @RequestParam("enabled") Boolean enabled){
+        LocalDateTime stringToDate = LocalDateTime.from(LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+      Event result = eventController.getEventByField(name, description, stringToDate, location, enabled);
       return ResponseEntity.ok().body(result);
     }
 }
