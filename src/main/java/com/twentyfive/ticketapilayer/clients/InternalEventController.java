@@ -36,6 +36,6 @@ public interface InternalEventController {
     Event updateEventById(@PathVariable String id, @RequestBody Event event);
 
     @RequestMapping(method = RequestMethod.GET, value="/get/event/byFields")
-    Event getEventByField(@RequestParam(" ") String name, @RequestParam(" ") String description, @RequestParam(" ") LocalDateTime date, @RequestParam(" ") String location, @RequestParam(" ") Boolean enabled);
+    Event getEventByField(@RequestParam("name") String name, @RequestParam("description") String description, @RequestParam("date") LocalDateTime date, @RequestParam("location") String location, @RequestParam("enabled") Boolean enabled);
 
 }
