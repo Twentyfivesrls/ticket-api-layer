@@ -15,6 +15,7 @@ import twentyfive.twentyfiveadapter.adapter.Mapper.TwentyFiveMapper;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -93,7 +94,10 @@ public class EventController {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
 
         String tmp = date.toString();
-        LocalDateTime dateTime = LocalDateTime.parse(tmp, formatter);
+        ZonedDateTime zonedDateTime = ZonedDateTime.parse(tmp, formatter);
+        LocalDateTime dateTime = zonedDateTime.toLocalDateTime();
+
+
         System.out.println("DATE " + dateTime);
 
         Event result = eventController.getEventByField(name, description, dateTime, location, enabled);
