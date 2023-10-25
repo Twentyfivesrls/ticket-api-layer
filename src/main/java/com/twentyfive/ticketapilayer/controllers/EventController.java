@@ -92,13 +92,18 @@ public class EventController {
     public ResponseEntity<Event> getEventByField(@RequestParam("name") String name, @RequestParam("description") String description, @RequestParam("date") String date, @RequestParam("location") String location, @RequestParam("enabled") Boolean enabled) {
         String username = authenticationService.getUsername();
 
+        String tmp = date;
+        System.out.println("DATE  :"+tmp);
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
 
         LocalDateTime dateTime = LocalDateTime.parse(date, formatter).atZone(ZoneOffset.UTC).toLocalDateTime();
         LocalDateTime dateTimePlus2Hours = dateTime.plusHours(2);
+        System.out.println("DATE  FORMATTED:"+dateTimePlus2Hours);
 
-        Event result = eventController.getEventByField(name, description, dateTimePlus2Hours, location, enabled);
 
-        return ResponseEntity.ok().body(result);
+       // Event result = eventController.getEventByField(name, description, dateTimePlus2Hours, location, enabled);
+
+        return ResponseEntity.ok().body(null);
     }
 }
