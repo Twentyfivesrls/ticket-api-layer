@@ -88,7 +88,8 @@ public class EventController {
 
     @GetMapping("/get/event/byFields")
     public  ResponseEntity<Event> getEventByField(@RequestParam("name") String name, @RequestParam("description") String description, @RequestParam("date") String date, @RequestParam("location") String location, @RequestParam("enabled") Boolean enabled){
-        LocalDateTime stringToDate = LocalDateTime.from(LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+      LocalDateTime stringToDate = LocalDateTime.from(LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+      System.out.println("String to date  :" +stringToDate);
       Event result = eventController.getEventByField(name, description, stringToDate, location, enabled);
       return ResponseEntity.ok().body(result);
     }
