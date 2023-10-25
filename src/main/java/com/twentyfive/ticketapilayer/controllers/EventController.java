@@ -86,8 +86,8 @@ public class EventController {
         return ResponseEntity.ok().body(result);
     }
 
-    @GetMapping("/get/event/byFields/{name}/{description}/{date}/{location}/{enabled}")
-    public  ResponseEntity<Event> getEventByField(@PathVariable String name, @PathVariable String description, @PathVariable LocalDateTime date,@PathVariable String location, @PathVariable  Boolean enabled){
+    @GetMapping("/get/event/byFields")
+    public  ResponseEntity<Event> getEventByField(@RequestParam(" ") String name, @RequestParam(" ") String description, @RequestParam(" ") LocalDateTime date, @RequestParam(" ") String location, @RequestParam(" ") Boolean enabled){
       Event result = eventController.getEventByField(name, description, date, location, enabled);
 
       return ResponseEntity.ok().body(result);
