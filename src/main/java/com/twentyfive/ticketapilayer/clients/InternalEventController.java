@@ -4,6 +4,7 @@ import com.twentyfive.twentyfivemodel.filterTicket.EventFilter;
 import com.twentyfive.twentyfivemodel.models.ticketModels.Event;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.data.domain.Page;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,6 +37,7 @@ public interface InternalEventController {
     Event updateEventById(@PathVariable String id, @RequestBody Event event);
 
     @RequestMapping(method = RequestMethod.GET, value="/get/event/byFields")
-    Event getEventByField(@RequestParam("name") String name, @RequestParam("description") String description, @RequestParam("date") LocalDateTime date, @RequestParam("location") String location, @RequestParam("enabled") Boolean enabled);
+    Event getEventByField(@RequestParam("name") String name, @RequestParam("description") String description, @RequestParam("date") @DateTimeFormat(pattern="dd/MM/yy, HH:mm") LocalDateTime date,
+             @RequestParam("location") String location, @RequestParam("enabled") Boolean enabled);
 
 }
