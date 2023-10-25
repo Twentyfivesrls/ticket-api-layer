@@ -95,9 +95,9 @@ public class TicketController {
     }
 
     @GetMapping("/generate/qrCode/ticket/number/{ticketNumber}")
-    public ResponseEntity<Object> getEventList(@PathVariable String ticketNumber) {
+    public ResponseEntity<Object> generateQrCode(@PathVariable String ticketNumber) {
         String username = authenticationService.getUsername();
-        byte[] result = ticketController.getEventList(ticketNumber);
+        byte[] result = ticketController.generateQrCode(ticketNumber);
         return ResponseEntity.ok().body(result);
     }
 

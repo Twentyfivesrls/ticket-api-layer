@@ -37,4 +37,7 @@ public interface InternalAddressbookController {
 
     @RequestMapping(method = RequestMethod.PUT , value="/update/{id}")
     AddressBook updateAddressBook(@PathVariable String id, @RequestBody AddressBook addressBook);
+
+    @RequestMapping(method = RequestMethod.POST, value = "/save/addressbook")
+    AddressBook saveAddressbook(@RequestBody AddressBook addressBook);
 }

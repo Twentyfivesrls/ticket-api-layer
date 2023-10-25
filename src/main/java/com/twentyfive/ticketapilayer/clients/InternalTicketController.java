@@ -49,7 +49,7 @@ public interface InternalTicketController {
     List<Ticket> getTicketByIsUsed(@PathVariable Boolean isUsed);
 
     @RequestMapping(method = RequestMethod.GET, value="/generate/qrCode/ticket/number/{ticketNumber}")
-    byte[] getEventList(@PathVariable String ticketNumber);
+    byte[] generateQrCode(@PathVariable String ticketNumber);
 
     @RequestMapping(method = RequestMethod.GET, value="/find/all")
     List<Ticket> findAll(@RequestParam("username") String username);

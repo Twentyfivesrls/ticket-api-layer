@@ -79,4 +79,11 @@ public class AddressbookController {
         return ResponseEntity.ok().body(result);
     }
 
+    @PostMapping("/save/addressbook")
+    public ResponseEntity<AddressBook> saveAddressbook(@RequestBody AddressBook addressBook){
+        String username = authenticationService.getUsername();
+        AddressBook result = addressbookController.saveAddressbook(addressBook);
+        return ResponseEntity.ok().body(result);
+    }
+
 }
