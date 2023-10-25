@@ -91,7 +91,10 @@ public class EventController {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
         LocalDateTime dateTime = LocalDateTime.parse(date, formatter);
 
+        System.out.println("DATA :" + dateTime);
+
         Event result = eventController.getEventByField(name, description, dateTime, location, enabled);
+        System.out.println("RESULT :" + result);
 
         return ResponseEntity.ok().body(result);
     }
