@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @FeignClient(name = "InternalEventController", url = "http://tomcat-twentyfive-db:8091/twentyfive-db/event")
@@ -33,4 +34,8 @@ public interface InternalEventController {
 
     @RequestMapping(method = RequestMethod.PUT, value="/update/{id}")
     Event updateEventById(@PathVariable String id, @RequestBody Event event);
+
+    @RequestMapping(method = RequestMethod.GET, value="/get/event/byFields")
+    Event getEventByField(@RequestParam("name") String name, @RequestParam("description") String description, @RequestParam("date") LocalDateTime date, @RequestParam("location") String location, @RequestParam("enabled") Boolean enabled);
+
 }

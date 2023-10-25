@@ -9,8 +9,11 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.twentyfive.twentyfivemodel.filterTicket.EventFilter;
+import twentyfive.twentyfiveadapter.adapter.Document.TicketObjDocumentDB.EventDocumentDB;
+import twentyfive.twentyfiveadapter.adapter.Mapper.TwentyFiveMapper;
 
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -79,5 +82,11 @@ public class EventController {
         String username = authenticationService.getUsername();
         Event result = eventController.updateEventById(id, event);
         return ResponseEntity.ok().body(result);
+    }
+
+    @GetMapping("/get/event/byFields")
+    public  ResponseEntity<Event> getEventByField(@RequestParam("name") String name, @RequestParam("description") String description, @RequestParam("date") LocalDateTime date, @RequestParam("location") String location, @RequestParam("enabled") Boolean enabled){
+      Event result = eventController.getEventByField(name, description, date, location, enabled);
+      return ResponseEntity.ok().body(result);
     }
 }
