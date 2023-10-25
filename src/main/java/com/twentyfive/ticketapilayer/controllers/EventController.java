@@ -87,15 +87,14 @@ public class EventController {
     }
 
     @GetMapping("/get/event/byFields")
-    public ResponseEntity<Event> getEventByField(@RequestParam("name") String name, @RequestParam("description") String description, @RequestParam("date") String date, @RequestParam("location") String location, @RequestParam("enabled") Boolean enabled) {
+    public ResponseEntity<Event> getEventByField(@RequestParam("name") String name, @RequestParam("description") String description, @RequestParam("date") LocalDateTime date, @RequestParam("location") String location, @RequestParam("enabled") Boolean enabled) {
         String username = authenticationService.getUsername();
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
-        LocalDateTime dateTime = LocalDateTime.parse(date, formatter);
+        date.format(formatter);
 
-        System.out.println("DATA :" + dateTime);
 
-        Event result = eventController.getEventByField(name, description, dateTime, location, enabled);
+        Event result = eventController.getEventByField(name, description, date, location, enabled);
         System.out.println("RESULT :" + result);
 
         return ResponseEntity.ok().body(result);
