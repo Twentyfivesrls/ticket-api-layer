@@ -35,7 +35,7 @@ public interface InternalEventController {
     @RequestMapping(method = RequestMethod.PUT, value="/update/{id}")
     Event updateEventById(@PathVariable String id, @RequestBody Event event);
 
-    @RequestMapping(method = RequestMethod.GET, value="/get/event/byFields")
-    Event getEventByField(@RequestBody Event event);
+    @RequestMapping(method = RequestMethod.GET, value="/get/event/byFields/{name}/{description}/{date}/{location}/{enabled}")
+    Event getEventByField(@PathVariable String name, @PathVariable String description, @PathVariable LocalDateTime date,@PathVariable String location, @PathVariable  Boolean enabled);
 
 }
