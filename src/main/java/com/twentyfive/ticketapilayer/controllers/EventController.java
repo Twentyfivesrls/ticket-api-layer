@@ -15,6 +15,7 @@ import twentyfive.twentyfiveadapter.adapter.Mapper.TwentyFiveMapper;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -91,16 +92,12 @@ public class EventController {
     public ResponseEntity<Event> getEventByField(@RequestParam("name") String name, @RequestParam("description") String description, @RequestParam("date") String date, @RequestParam("location") String location, @RequestParam("enabled") Boolean enabled) {
         String username = authenticationService.getUsername();
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
 
-        ZonedDateTime zonedDateTime = ZonedDateTime.parse(date, formatter);
-        LocalDateTime dateTime = zonedDateTime.toLocalDateTime();
+        LocalDateTime dateTime = LocalDateTime.parse(date, formatter).atZone(ZoneOffset.UTC).toLocalDateTime();
+        LocalDateTime dateTimePlus2Hours = dateTime.plusHours(2);
 
-
-        System.out.println("DATE " + dateTime);
-
-        Event result = eventController.getEventByField(name, description, dateTime, location, enabled);
-        System.out.println("RESULT :" + result);
+        Event result = eventController.getEventByField(name, description, dateTimePlus2Hours, location, enabled);
 
         return ResponseEntity.ok().body(result);
     }
