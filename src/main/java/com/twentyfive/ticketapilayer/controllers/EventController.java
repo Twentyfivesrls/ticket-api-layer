@@ -31,7 +31,7 @@ public class EventController {
     private AuthenticationService authenticationService;
 
     @PostMapping("/filter")
-    public ResponseEntity<Object> filterEventList(@RequestBody EventFilter event, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int sizeP){
+    public ResponseEntity<Object> filterEventList(@RequestBody EventFilter event, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int sizeP) {
         System.out.println("sono nel controller");
 
         String username = authenticationService.getUsername();
@@ -87,9 +87,12 @@ public class EventController {
     }
 
     @GetMapping("/get/event/byFields")
-    public  ResponseEntity<Event> getEventByField(@RequestParam("name") String name, @RequestParam("description") String description, @RequestParam("date") LocalDateTime date, @RequestParam("location") String location, @RequestParam("enabled") Boolean enabled){
-      Event result = eventController.getEventByField(name, description, date, location, enabled);
+    public ResponseEntity<Event> getEventByField(@RequestParam("name") String name, @RequestParam("description") String description, @RequestParam("date") String date, @RequestParam("location") String location, @RequestParam("enabled") Boolean enabled) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+        LocalDateTime dateTime = LocalDateTime.parse(date, formatter);
 
-      return ResponseEntity.ok().body(result);
+        Event result = eventController.getEventByField(name, description, dateTime, location, enabled);
+
+        return ResponseEntity.ok().body(result);
     }
 }
