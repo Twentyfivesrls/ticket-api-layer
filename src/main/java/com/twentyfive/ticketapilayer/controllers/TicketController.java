@@ -50,10 +50,10 @@ public class TicketController {
         return ResponseEntity.ok().body(result);
     }
 
-    @PutMapping("/setStatus/{id}/{status}")
-    public ResponseEntity<Object> setStatus(@PathVariable String id, @PathVariable Boolean status) {
+    @PutMapping("/setStatus/{code}/{status}")
+    public ResponseEntity<Object> setStatus(@PathVariable String code, @PathVariable Boolean status) {
         String username = authenticationService.getUsername();
-        Ticket result = ticketController.setStatus(id, status);
+        Ticket result = ticketController.setStatus(code, status);
         return ResponseEntity.ok().body(result);
     }
 
