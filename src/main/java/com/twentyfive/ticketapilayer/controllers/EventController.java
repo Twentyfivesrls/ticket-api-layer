@@ -95,14 +95,14 @@ public class EventController {
         String tmp = date;
         System.out.println("DATE  :"+tmp);
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS");
 
         LocalDateTime dateTime = LocalDateTime.parse(date, formatter).atZone(ZoneOffset.UTC).toLocalDateTime();
-        LocalDateTime dateTimePlus2Hours = dateTime.plusHours(2);
-        System.out.println("DATE  FORMATTED:"+dateTimePlus2Hours);
+
+        System.out.println("DATE  FORMATTED:"+dateTime);
 
 
-       // Event result = eventController.getEventByField(name, description, dateTimePlus2Hours, location, enabled);
+        Event result = eventController.getEventByField(name, description, dateTime, location, enabled);
 
         return ResponseEntity.ok().body(null);
     }
