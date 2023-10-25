@@ -57,10 +57,10 @@ public class TicketController {
         return ResponseEntity.ok().body(result);
     }
 
-    @PutMapping("update/usedTicket/{id}/{used}")
-    public ResponseEntity<Object> setUsed(@PathVariable String id, @PathVariable Boolean used) {
+    @PutMapping("update/usedTicket/{code}/{used}")
+    public ResponseEntity<Object> setUsed(@PathVariable String code, @PathVariable Boolean used) {
         String username = authenticationService.getUsername();
-        Ticket result = ticketController.setUsed(id, used);
+        Ticket result = ticketController.setUsed(code, used);
         return ResponseEntity.ok().body(result);
     }
 
