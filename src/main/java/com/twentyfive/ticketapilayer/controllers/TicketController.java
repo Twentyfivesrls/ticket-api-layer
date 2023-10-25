@@ -75,7 +75,6 @@ public class TicketController {
     @GetMapping(value = "/export/excel/{userId}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
     public ResponseEntity<Object> downloadExcel(@PathVariable String userId) {
         //String username = authenticationService.getUsername();
-        System.out.println(" username api layer  :"+userId);
         byte[] result = ticketController.downloadExcel(userId);
         return ResponseEntity.ok()
                 .header("Content-Disposition", "attachment; filename=exported_data.xlsx")
