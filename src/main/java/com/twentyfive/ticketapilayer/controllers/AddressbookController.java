@@ -74,7 +74,7 @@ public class AddressbookController {
 
     @PutMapping("/update/{email}")
     public ResponseEntity<Object> updateAddressBook(@PathVariable String email, @RequestBody AddressBook addressBook) {
-
+        String username = authenticationService.getUsername();
         AddressBook result = addressbookController.updateAddressBook(email, addressBook);
         return ResponseEntity.ok().body(result);
     }
