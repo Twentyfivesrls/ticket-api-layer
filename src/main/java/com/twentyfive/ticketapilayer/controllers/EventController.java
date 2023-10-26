@@ -9,14 +9,11 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.twentyfive.twentyfivemodel.filterTicket.EventFilter;
-import twentyfive.twentyfiveadapter.adapter.Document.TicketObjDocumentDB.EventDocumentDB;
-import twentyfive.twentyfiveadapter.adapter.Mapper.TwentyFiveMapper;
 
 
-import java.time.LocalDate;
+
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -34,7 +31,6 @@ public class EventController {
 
     @PostMapping("/filter")
     public ResponseEntity<Object> filterEventList(@RequestBody EventFilter event, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int sizeP) {
-        System.out.println("sono nel controller");
 
         String username = authenticationService.getUsername();
         Page<Event> result = eventController.filterEventList(event, page, sizeP, username);
@@ -109,6 +105,7 @@ public class EventController {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Event> deleteEvent(@PathVariable String id){
+        String username = authenticationService.getUsername();
         eventController.deleteEvent(id);
         return ResponseEntity.ok().build();
     }

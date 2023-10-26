@@ -5,7 +5,6 @@ import com.twentyfive.twentyfivemodel.models.ticketModels.Event;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -40,7 +39,7 @@ public interface InternalEventController {
     Event getEventByField(@RequestParam("name") String name, @RequestParam("description") String description, @RequestParam("date") @DateTimeFormat(pattern="dd/MM/yy, HH:mm") LocalDateTime date,
              @RequestParam("location") String location, @RequestParam("enabled") Boolean enabled);
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "delete/{id}")
+    @RequestMapping(method = RequestMethod.DELETE, value = "/delete/{id}")
     Event deleteEvent(@PathVariable String id);
 
 }
