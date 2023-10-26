@@ -51,7 +51,7 @@
         <dependency>
             <groupId>com.twentyfive</groupId>
             <artifactId>authorization-controller</artifactId>
-            <version>0.3.6</version>
+            <version>0.3.8</version>
         </dependency>
 
         <dependency>
