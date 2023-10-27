@@ -65,8 +65,8 @@ public class TicketController {
         return ResponseEntity.ok().body(result);
     }
 
-    @DeleteMapping("/delete/{code}")
-    public ResponseEntity<Object> deleteTicket(@PathVariable String code) {
+    @DeleteMapping("/delete")
+    public ResponseEntity<Object> deleteTicket(@RequestParam("code") String code) {
         String username = authenticationService.getUsername();
         Ticket result = ticketController.deleteTicket(code);
         return ResponseEntity.ok().body(result);
