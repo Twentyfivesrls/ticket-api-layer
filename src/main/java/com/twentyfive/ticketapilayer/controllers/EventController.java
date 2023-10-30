@@ -33,8 +33,16 @@ public class EventController {
     public ResponseEntity<Object> filterEventList(@RequestBody EventFilter event, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int sizeP) {
 
         String username = authenticationService.getUsername();
-        System.out.println("Username   +" + username);
         Page<Event> result = eventController.filterEventList(event, page, sizeP, username);
+
+        return ResponseEntity.ok().body(result);
+    }
+
+    @PostMapping("/filter/event/autocomplete")
+    public ResponseEntity<Object> filterEventAutocomplete(@RequestBody String event, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int sizeP) {
+
+        String username = authenticationService.getUsername();
+        Page<Event> result = eventController.filterEventAutocomplete(event, page, sizeP, username);
 
         return ResponseEntity.ok().body(result);
     }
