@@ -39,10 +39,10 @@ public class EventController {
     }
 
     @PostMapping("/filter/event/autocomplete")
-    public ResponseEntity<Object> filterEventAutocomplete(@RequestBody String event, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int sizeP) {
+    public ResponseEntity<Object> filterEventAutocomplete(@RequestParam("filterObject") String filterObject, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int sizeP) {
 
         String username = authenticationService.getUsername();
-        Page<Event> result = eventController.filterEventAutocomplete(event, page, sizeP, username);
+        Page<Event> result = eventController.filterEventAutocomplete(filterObject, page, sizeP, username);
 
         return ResponseEntity.ok().body(result);
     }
