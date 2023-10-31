@@ -4,6 +4,7 @@ import com.twentyfive.authorizationcontroller.services.AuthenticationService;
 import com.twentyfive.ticketapilayer.clients.InternalAddressbookController;
 import com.twentyfive.twentyfivemodel.filterTicket.AddressBookFilter;
 import com.twentyfive.twentyfivemodel.models.ticketModels.AddressBook;
+import com.twentyfive.twentyfivemodel.models.ticketModels.Event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -71,6 +72,16 @@ public class AddressbookController {
         Page<AddressBook> result = addressbookController.getAdressbookList(filter, page, sizeP, username);
         return ResponseEntity.ok().body(result);
     }
+
+    @PostMapping("/get/autocomplete")
+    public ResponseEntity<Page<AddressBook>> filterEventAutocomplete(@RequestParam("filterObject") String filterObject, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size) {
+
+        String username = authenticationService.getUsername();
+        Page<AddressBook> result = addressbookController.filterAutocomplete(filterObject, page, size, username);
+
+        return ResponseEntity.ok().body(result);
+    }
+
 
     @PutMapping("/update/{email}")
     public ResponseEntity<Object> updateAddressBook(@PathVariable String email, @RequestBody AddressBook addressBook) {

@@ -35,6 +35,9 @@ public interface InternalAddressbookController {
     @RequestMapping(method = RequestMethod.POST , value="/list")
     Page<AddressBook> getAdressbookList(@RequestBody AddressBookFilter filter, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size, @RequestParam("username") String username);
 
+    @RequestMapping(method = RequestMethod.POST, value = "/get/autocomplete")
+    Page<AddressBook> filterAutocomplete(@RequestParam("filterObject") String filterObject, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size, @RequestParam("username") String username);
+
     @RequestMapping(method = RequestMethod.PUT , value="/update/{email}")
     AddressBook updateAddressBook(@PathVariable String email, @RequestBody AddressBook addressBook);
 

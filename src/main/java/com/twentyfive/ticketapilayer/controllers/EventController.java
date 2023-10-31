@@ -42,7 +42,7 @@ public class EventController {
     public ResponseEntity<Page<Event>> filterEventAutocomplete(@RequestParam("filterObject") String filterObject, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size) {
 
         String username = authenticationService.getUsername();
-        Page<Event> result = eventController.filterEventAutocomplete(filterObject, page, size, username);
+        Page<Event> result = eventController.filterAutocomplete(filterObject, page, size, username);
 
         return ResponseEntity.ok().body(result);
     }

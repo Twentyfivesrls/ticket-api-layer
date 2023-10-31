@@ -1,6 +1,7 @@
 package com.twentyfive.ticketapilayer.clients;
 
 import com.twentyfive.twentyfivemodel.filterTicket.TicketFilter;
+import com.twentyfive.twentyfivemodel.models.ticketModels.Event;
 import com.twentyfive.twentyfivemodel.models.ticketModels.Ticket;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.data.domain.Page;
@@ -26,6 +27,9 @@ public interface InternalTicketController {
                                @RequestParam(defaultValue = "0") int page,
                                @RequestParam(defaultValue = "5") int size,
                                @RequestParam String username);
+
+    @RequestMapping(method = RequestMethod.POST, value = "/get/autocomplete")
+    Page<Ticket> filterAutocomplete(@RequestParam("filterObject") String filterObject, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size, @RequestParam("username") String username);
 
     @RequestMapping(method = RequestMethod.GET, value="/getTicket/byCode/{code}")
     Ticket getTicketByCode(@PathVariable String code);
