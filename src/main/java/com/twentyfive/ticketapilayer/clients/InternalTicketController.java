@@ -32,16 +32,16 @@ public interface InternalTicketController {
     Page<Ticket> filterAutocomplete(@RequestParam("filterObject") String filterObject, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size, @RequestParam("username") String username);
 
     @RequestMapping(method = RequestMethod.GET, value="/getTicketById/{id}")
-    Ticket getTicketByCode(@PathVariable String id);
+    Ticket getTicketById(@PathVariable String id);
 
-    @RequestMapping(method = RequestMethod.PUT, value="/setStatus/{code}/{status}")
-    Ticket setStatus(@PathVariable String code, @PathVariable Boolean status);
+    @RequestMapping(method = RequestMethod.PUT, value="/setStatus/{id}/{status}")
+    Ticket setStatus(@PathVariable String id, @PathVariable Boolean status);
 
-    @RequestMapping(method = RequestMethod.PUT, value="/update/usedTicket/{code}/{used}")
-    Ticket setUsed(@PathVariable String code, @PathVariable Boolean used);
+    @RequestMapping(method = RequestMethod.PUT, value="/update/usedTicket/{id}/{used}")
+    Ticket setUsed(@PathVariable String id, @PathVariable Boolean used);
 
     @RequestMapping(method = RequestMethod.DELETE, value="/delete")
-    Ticket deleteTicket(@RequestParam("code") String code);
+    Ticket deleteTicket(@RequestParam("id") String id);
 
     @RequestMapping(method = RequestMethod.GET, value="/export/excel/{userId}", produces= MediaType.APPLICATION_OCTET_STREAM_VALUE)
     byte[] downloadExcel(@PathVariable String userId);

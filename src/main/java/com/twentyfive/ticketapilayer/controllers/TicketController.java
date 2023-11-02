@@ -57,28 +57,28 @@ public class TicketController {
     @GetMapping("/getTicketById/{id}")
     public ResponseEntity<Object> getTicketByCode(@PathVariable String id) {
         String username = authenticationService.getUsername();
-        Ticket result = ticketController.getTicketByCode(id);
+        Ticket result = ticketController.getTicketById(id);
         return ResponseEntity.ok().body(result);
     }
 
-    @PutMapping("/setStatus/{code}/{status}")
-    public ResponseEntity<Object> setStatus(@PathVariable String code, @PathVariable Boolean status) {
+    @PutMapping("/setStatus/{id}/{status}")
+    public ResponseEntity<Object> setStatus(@PathVariable String id, @PathVariable Boolean status) {
         String username = authenticationService.getUsername();
-        Ticket result = ticketController.setStatus(code, status);
+        Ticket result = ticketController.setStatus(id, status);
         return ResponseEntity.ok().body(result);
     }
 
-    @PutMapping("update/usedTicket/{code}/{used}")
-    public ResponseEntity<Object> setUsed(@PathVariable String code, @PathVariable Boolean used) {
+    @PutMapping("update/usedTicket/{id}/{used}")
+    public ResponseEntity<Object> setUsed(@PathVariable String id, @PathVariable Boolean used) {
         String username = authenticationService.getUsername();
-        Ticket result = ticketController.setUsed(code, used);
+        Ticket result = ticketController.setUsed(id, used);
         return ResponseEntity.ok().body(result);
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<Object> deleteTicket(@RequestParam("code") String code) {
+    public ResponseEntity<Object> deleteTicket(@RequestParam("id") String id) {
         String username = authenticationService.getUsername();
-        Ticket result = ticketController.deleteTicket(code);
+        Ticket result = ticketController.deleteTicket(id);
         return ResponseEntity.ok().body(result);
     }
 

@@ -24,10 +24,10 @@ public class AddressbookController {
     @Autowired
     private AuthenticationService authenticationService;
 
-    @DeleteMapping("/delete/{email}")
-    public ResponseEntity<Object> deleteAddressBook(@PathVariable String email) {
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Object> deleteAddressBook(@PathVariable String id) {
         String username = authenticationService.getUsername();
-        AddressBook result = addressbookController.deleteAddressBook(email);
+        AddressBook result = addressbookController.deleteAddressBook(id);
         return ResponseEntity.ok().body(result);
     }
 
@@ -83,10 +83,10 @@ public class AddressbookController {
     }
 
 
-    @PutMapping("/update/{email}")
-    public ResponseEntity<Object> updateAddressBook(@PathVariable String email, @RequestBody AddressBook addressBook) {
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Object> updateAddressBook(@PathVariable String id, @RequestBody AddressBook addressBook) {
         String username = authenticationService.getUsername();
-        AddressBook result = addressbookController.updateAddressBook(email, addressBook);
+        AddressBook result = addressbookController.updateAddressBook(id, addressBook);
         return ResponseEntity.ok().body(result);
     }
 
