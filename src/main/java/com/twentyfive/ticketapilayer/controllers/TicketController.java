@@ -54,10 +54,10 @@ public class TicketController {
         return ResponseEntity.ok().body(result);
     }
 
-    @GetMapping("/getTicket/byCode/{code}")
-    public ResponseEntity<Object> getTicketByCode(@PathVariable String code) {
+    @GetMapping("/getTicketById/{id}")
+    public ResponseEntity<Object> getTicketByCode(@PathVariable String id) {
         String username = authenticationService.getUsername();
-        Ticket result = ticketController.getTicketByCode(code);
+        Ticket result = ticketController.getTicketByCode(id);
         return ResponseEntity.ok().body(result);
     }
 

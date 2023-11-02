@@ -31,8 +31,8 @@ public interface InternalTicketController {
     @RequestMapping(method = RequestMethod.POST, value = "/get/autocomplete")
     Page<Ticket> filterAutocomplete(@RequestParam("filterObject") String filterObject, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size, @RequestParam("username") String username);
 
-    @RequestMapping(method = RequestMethod.GET, value="/getTicket/byCode/{code}")
-    Ticket getTicketByCode(@PathVariable String code);
+    @RequestMapping(method = RequestMethod.GET, value="/getTicketById/{id}")
+    Ticket getTicketByCode(@PathVariable String id);
 
     @RequestMapping(method = RequestMethod.PUT, value="/setStatus/{code}/{status}")
     Ticket setStatus(@PathVariable String code, @PathVariable Boolean status);
