@@ -34,6 +34,9 @@ public interface InternalTicketController {
     @RequestMapping(method = RequestMethod.GET, value="/getTicketById/{id}")
     Ticket getTicketById(@PathVariable String id);
 
+    @RequestMapping(method = RequestMethod.GET, value = "/getTicket/byCode/{code}")
+    Ticket getTickedByCode(@PathVariable String code);
+
     @RequestMapping(method = RequestMethod.PUT, value="/setStatus/{id}/{status}")
     Ticket setStatus(@PathVariable String id, @PathVariable Boolean status);
 
