@@ -24,6 +24,14 @@ public class AddressbookController {
     @Autowired
     private AuthenticationService authenticationService;
 
+    @GetMapping("/allElement")
+    public ResponseEntity<List<AddressBook>> getAll(){
+        String username = authenticationService.getUsername();
+        List<AddressBook> result = addressbookController.getAll(username);
+        return ResponseEntity.ok().body(result);
+    }
+
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Object> deleteAddressBook(@PathVariable String id) {
         String username = authenticationService.getUsername();

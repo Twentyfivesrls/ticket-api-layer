@@ -17,6 +17,9 @@ public interface InternalAddressbookController {
     @RequestMapping(method = RequestMethod.DELETE, value="/delete/{id}")
     AddressBook deleteAddressBook(@PathVariable String id);
 
+    @RequestMapping(method = RequestMethod.GET, value = "/allElement")
+    List<AddressBook> getAll(@RequestParam("username") String username);
+
     @RequestMapping(method = RequestMethod.GET , value="/getById/{id}")
     AddressBook getById(@PathVariable String id);
 
