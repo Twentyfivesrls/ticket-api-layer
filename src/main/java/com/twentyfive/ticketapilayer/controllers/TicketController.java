@@ -32,7 +32,7 @@ public class TicketController {
                                                  @RequestParam("email") String email) {
         String username = authenticationService.getUsername();
         ticket.setUserId(username);
-        ticket.setActive(false);
+        ticket.setActive(true);
         Ticket result = ticketController.generateTicket(ticket,id, name, lastName, email, username);
         return ResponseEntity.ok().body(result);
     }

@@ -57,6 +57,7 @@ public class EventController {
     @PostMapping("/save")
     public ResponseEntity<Object> saveEvent(@RequestBody Event event) {
         String username = authenticationService.getUsername();
+        System.out.println("evento :"+ event);
         event.setUserId(username);
         event.setEnabled(true);
         Event result = eventController.saveEvent(event);
