@@ -31,6 +31,12 @@ public class AddressbookController {
         return ResponseEntity.ok().body(result);
     }
 
+    @GetMapping("/findByUsername")
+    public ResponseEntity<AddressBook> getByUsername(){
+        String username = authenticationService.getUsername();
+        AddressBook result = addressbookController.getByUsername(username);
+        return ResponseEntity.ok().body(result);
+    }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Object> deleteAddressBook(@PathVariable String id) {
