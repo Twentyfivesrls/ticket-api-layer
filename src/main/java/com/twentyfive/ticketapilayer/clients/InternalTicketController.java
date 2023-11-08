@@ -17,6 +17,7 @@ public interface InternalTicketController {
 
     @RequestMapping(method = RequestMethod.POST, value="/generate")
     Ticket generateTicket(@RequestBody Ticket ticket,
+                          @RequestParam("id") String id,
                           @RequestParam("name") String name,
                           @RequestParam("lastName") String lastName,
                           @RequestParam("email") String email,

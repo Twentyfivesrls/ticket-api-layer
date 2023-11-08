@@ -26,13 +26,14 @@ public class TicketController {
 
     @PostMapping("/generate")
     public ResponseEntity<Object> generateTicket(@RequestBody Ticket ticket,
+                                                 @RequestParam("id") String id,
                                                  @RequestParam("name") String name,
                                                  @RequestParam("lastName") String lastName,
                                                  @RequestParam("email") String email) {
         String username = authenticationService.getUsername();
         ticket.setUserId(username);
         ticket.setActive(false);
-        Ticket result = ticketController.generateTicket(ticket, name, lastName, email, username);
+        Ticket result = ticketController.generateTicket(ticket,id, name, lastName, email, username);
         return ResponseEntity.ok().body(result);
     }
 
