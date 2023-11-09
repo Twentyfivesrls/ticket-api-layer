@@ -30,7 +30,7 @@ public class EventController {
     private AuthenticationService authenticationService;
 
     @PostMapping("/filter")
-    public ResponseEntity<Object> filterEventList(@RequestBody EventFilter event, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int sizeP) {
+    public ResponseEntity<Object> filterEventList(@RequestBody Event event, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int sizeP) {
 
         String username = authenticationService.getUsername();
         Page<Event> result = eventController.filterEventList(event, page, sizeP, username);

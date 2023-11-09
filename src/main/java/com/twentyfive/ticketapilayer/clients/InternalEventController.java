@@ -14,7 +14,7 @@ import java.util.List;
 public interface InternalEventController {
 
     @RequestMapping(method = RequestMethod.POST, value="/filter")
-    Page<Event> filterEventList(@RequestBody EventFilter event, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size, @RequestParam("username") String username);
+    Page<Event> filterEventList(@RequestBody Event event, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size, @RequestParam("username") String username);
 
     @RequestMapping(method = RequestMethod.POST, value = "/filter/event/autocomplete")
     Page<Event> filterAutocomplete(@RequestParam("filterObject") String filterObject, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size, @RequestParam("username") String username);
