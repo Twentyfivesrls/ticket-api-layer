@@ -112,10 +112,10 @@ public class TicketController {
         return ResponseEntity.ok().body(result);
     }
 
-    @GetMapping("/generate/qrCode/ticket/number/{ticketNumber}")
-    public ResponseEntity<Object> generateQrCode(@PathVariable String ticketNumber) {
+    @GetMapping("/generate/qrCode/ticket/number")
+    public ResponseEntity<Object> generateQrCode(@RequestParam("url") String url) {
         String username = authenticationService.getUsername();
-        byte[] result = ticketController.generateQrCode(ticketNumber);
+        byte[] result = ticketController.generateQrCode(url);
         return ResponseEntity.ok().body(result);
     }
 
