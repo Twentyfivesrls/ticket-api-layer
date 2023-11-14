@@ -1,15 +1,11 @@
 package com.twentyfive.ticketapilayer.clients;
 
 import com.twentyfive.twentyfivemodel.filterTicket.TicketFilter;
-import com.twentyfive.twentyfivemodel.models.ticketModels.Event;
 import com.twentyfive.twentyfivemodel.models.ticketModels.Ticket;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.data.domain.Page;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @FeignClient(name = "InternalTicketController", url = "http://tomcat-twentyfive-db:8091/twentyfive-db/ticket")
