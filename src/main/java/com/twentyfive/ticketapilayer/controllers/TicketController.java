@@ -44,7 +44,7 @@ public class TicketController {
     }
 
     @PostMapping("/list")
-    @PreAuthorize("hasRole('ROLE_single_realm_role')")
+    @PreAuthorize("hasRole('default-roles-twentyfive-internal')")
     public ResponseEntity<Object> getTicketList(@RequestBody TicketFilter ticket,
                                                 @RequestParam(defaultValue = "0") int page,
                                                 @RequestParam(defaultValue = "5") int size) {
