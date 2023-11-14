@@ -42,6 +42,8 @@ public class TicketController {
                                                 @RequestParam(defaultValue = "5") int size) {
         String username = authenticationService.getUsername();
         Page<Ticket> result = ticketController.getTicketList(ticket, page, size, username);
+        System.out.println("Sono nel layer, questo è lo username");
+        System.out.println(username);
         return ResponseEntity.ok().body(result);
     }
 
