@@ -50,8 +50,8 @@
 
         <dependency>
             <groupId>com.twentyfive</groupId>
-            <artifactId>authorization-controller</artifactId>
-            <version>0.3.8</version>
+            <artifactId>authorization-flow</artifactId>
+            <version>0.0.1</version>
         </dependency>
 
         <dependency>

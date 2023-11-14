@@ -20,17 +20,17 @@ public interface InternalTicketController {
                           @RequestParam("id") String id,
                           @RequestParam("name") String name,
                           @RequestParam("lastName") String lastName,
-                          @RequestParam("email") String email,
-                          @RequestParam("username") String username);
+                          @RequestParam("email") String email);
 
     @RequestMapping(method = RequestMethod.POST, value="/list")
     Page<Ticket> getTicketList(@RequestBody TicketFilter ticket,
                                @RequestParam(defaultValue = "0") int page,
-                               @RequestParam(defaultValue = "5") int size,
-                               @RequestParam String username);
+                               @RequestParam(defaultValue = "5") int size);
 
     @RequestMapping(method = RequestMethod.POST, value = "/get/autocomplete")
-    Page<Ticket> filterAutocomplete(@RequestParam("filterObject") String filterObject, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size, @RequestParam("username") String username);
+    Page<Ticket> filterAutocomplete(@RequestParam("filterObject") String filterObject,
+                                    @RequestParam(defaultValue = "0") int page,
+                                    @RequestParam(defaultValue = "5") int size);
 
     @RequestMapping(method = RequestMethod.GET, value="/getTicketById/{id}")
     Ticket getTicketById(@PathVariable String id);
@@ -60,5 +60,5 @@ public interface InternalTicketController {
     byte[] generateQrCode(@RequestParam("url") String url);
 
     @RequestMapping(method = RequestMethod.GET, value="/find/all")
-    List<Ticket> findAll(@RequestParam("username") String username);
+    List<Ticket> findAll();
 }
