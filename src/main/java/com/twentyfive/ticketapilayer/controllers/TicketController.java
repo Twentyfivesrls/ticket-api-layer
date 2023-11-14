@@ -1,5 +1,6 @@
 package com.twentyfive.ticketapilayer.controllers;
 
+import com.twentyfive.authorizationflow.keycloak_config.TokenConverterProperties;
 import com.twentyfive.authorizationflow.services.AuthenticationService;
 import com.twentyfive.ticketapilayer.clients.InternalTicketController;
 import com.twentyfive.twentyfivemodel.filterTicket.TicketFilter;
@@ -24,6 +25,11 @@ public class TicketController {
     @Autowired
     private AuthenticationService authenticationService;
 
+    @Autowired
+    private TokenConverterProperties ts;
+
+
+
     @PostMapping("/generate")
     public ResponseEntity<Object> generateTicket(@RequestBody Ticket ticket,
                                                  @RequestParam("id") String id,
@@ -42,6 +48,7 @@ public class TicketController {
     public ResponseEntity<Object> getTicketList(@RequestBody TicketFilter ticket,
                                                 @RequestParam(defaultValue = "0") int page,
                                                 @RequestParam(defaultValue = "5") int size) {
+        System.out.println("CIAOOOOOOOOO" + ts.getPrincipalAttribute());
         String username = authenticationService.getUsername();
         Page<Ticket> result = ticketController.getTicketList(ticket, page, size, username);
         System.out.println("Sono nel layer, questo è lo username");
