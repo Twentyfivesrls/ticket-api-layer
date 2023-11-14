@@ -3,7 +3,6 @@ package com.twentyfive.ticketapilayer.controllers;
 import com.twentyfive.authorizationcontroller.services.AuthenticationService;
 import com.twentyfive.ticketapilayer.clients.InternalTicketController;
 import com.twentyfive.twentyfivemodel.filterTicket.TicketFilter;
-import com.twentyfive.twentyfivemodel.models.ticketModels.Event;
 import com.twentyfive.twentyfivemodel.models.ticketModels.Ticket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

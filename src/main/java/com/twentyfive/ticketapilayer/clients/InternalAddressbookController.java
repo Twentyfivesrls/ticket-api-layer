@@ -2,13 +2,10 @@ package com.twentyfive.ticketapilayer.clients;
 
 import com.twentyfive.twentyfivemodel.filterTicket.AddressBookFilter;
 import com.twentyfive.twentyfivemodel.models.ticketModels.AddressBook;
-import com.twentyfive.twentyfivemodel.models.ticketModels.Event;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.data.domain.Page;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
+import org.springframework.data.domain.Page;
 import java.util.List;
 
 @FeignClient(name = "InternalAddressbookController", url = "http://tomcat-twentyfive-db:8091/twentyfive-db/addressbook")
