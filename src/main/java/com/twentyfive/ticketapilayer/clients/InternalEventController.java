@@ -14,13 +14,17 @@ import java.util.List;
 public interface InternalEventController {
 
     @RequestMapping(method = RequestMethod.POST, value="/filter")
-    Page<Event> filterEventList(@RequestBody Event event, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size, @RequestParam("username") String username);
+    Page<Event> filterEventList(@RequestBody Event event,
+                                @RequestParam(defaultValue = "0") int page,
+                                @RequestParam(defaultValue = "5") int size);
 
     @RequestMapping(method = RequestMethod.POST, value = "/filter/event/autocomplete")
-    Page<Event> filterAutocomplete(@RequestParam("filterObject") String filterObject, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size, @RequestParam("username") String username);
+    Page<Event> filterAutocomplete(@RequestParam("filterObject") String filterObject,
+                                   @RequestParam(defaultValue = "0") int page,
+                                   @RequestParam(defaultValue = "5") int size);
 
     @RequestMapping(method = RequestMethod.GET, value="/list")
-    List<Event> getEventList(@RequestParam("username") String username);
+    List<Event> getEventList();
 
     @RequestMapping(method = RequestMethod.POST, value="/save")
     Event saveEvent(@RequestBody Event event);
@@ -39,8 +43,11 @@ public interface InternalEventController {
     Event updateEventById(@PathVariable String id, @RequestBody Event event);
 
     @RequestMapping(method = RequestMethod.GET, value="/get/event/byFields")
-    Event getEventByField(@RequestParam("name") String name, @RequestParam("description") String description, @RequestParam("date") @DateTimeFormat(pattern="dd/MM/yy, HH:mm") LocalDateTime date,
-             @RequestParam("location") String location, @RequestParam("enabled") Boolean enabled);
+    Event getEventByField(@RequestParam("name") String name,
+                          @RequestParam("description") String description,
+                          @RequestParam("date") @DateTimeFormat(pattern="dd/MM/yy, HH:mm") LocalDateTime date,
+                            @RequestParam("location") String location,
+                          @RequestParam("enabled") Boolean enabled);
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/delete/{id}")
     Event deleteEvent(@PathVariable String id);
