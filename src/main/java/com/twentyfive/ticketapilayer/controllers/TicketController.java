@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@PreAuthorize("hasRole('ROLE_single_realm_role')")
 @RequestMapping("/ticket")
 @CrossOrigin(origins = "*")
 public class TicketController {
@@ -27,6 +28,11 @@ public class TicketController {
 
     @Autowired
     private TokenConverterProperties ts;
+
+    TicketController(){
+        System.out.println("CIAOOOOOOOOO" + ts.getPrincipalAttribute());
+
+    }
 
 
 
@@ -44,11 +50,9 @@ public class TicketController {
     }
 
     @PostMapping("/list")
-    @PreAuthorize("hasRole('default-roles-twentyfive-internal')")
     public ResponseEntity<Object> getTicketList(@RequestBody TicketFilter ticket,
                                                 @RequestParam(defaultValue = "0") int page,
                                                 @RequestParam(defaultValue = "5") int size) {
-        System.out.println("CIAOOOOOOOOO" + ts.getPrincipalAttribute());
         String username = authenticationService.getUsername();
         Page<Ticket> result = ticketController.getTicketList(ticket, page, size, username);
         System.out.println("Sono nel layer, questo è lo username");
