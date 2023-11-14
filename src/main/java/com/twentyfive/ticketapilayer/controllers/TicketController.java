@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@PreAuthorize("hasRole('ROLE_single_realm_role')")
 @RequestMapping("/ticket")
 @CrossOrigin(origins = "*")
 public class TicketController {
@@ -23,8 +24,6 @@ public class TicketController {
 
     @Autowired
     private AuthenticationService authenticationService;
-
-
 
 
 
@@ -41,7 +40,6 @@ public class TicketController {
         return ResponseEntity.ok().body(result);
     }
 
-    @PreAuthorize("hasRole('ROLE_single_realm_role')")
     @PostMapping("/list")
     public ResponseEntity<Object> getTicketList(@RequestBody TicketFilter ticket,
                                                 @RequestParam(defaultValue = "0") int page,

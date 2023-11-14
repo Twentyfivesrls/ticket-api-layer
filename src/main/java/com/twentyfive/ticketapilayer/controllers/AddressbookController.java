@@ -7,11 +7,13 @@ import com.twentyfive.twentyfivemodel.models.ticketModels.AddressBook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@PreAuthorize("hasRole('ROLE_single_realm_role')")
 @RequestMapping("/addressbook")
 @CrossOrigin(origins = "*")
 public class AddressbookController {
