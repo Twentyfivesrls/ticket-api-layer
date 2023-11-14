@@ -1,6 +1,5 @@
 package com.twentyfive.ticketapilayer.controllers;
 
-import com.twentyfive.authorizationflow.keycloak_config.TokenConverterProperties;
 import com.twentyfive.authorizationflow.services.AuthenticationService;
 import com.twentyfive.ticketapilayer.clients.InternalEventController;
 import com.twentyfive.twentyfivemodel.models.ticketModels.Event;
@@ -29,14 +28,11 @@ public class EventController {
     @Autowired
     private AuthenticationService authenticationService;
 
-    @Autowired
-    private TokenConverterProperties ts;
 
     @PostMapping("/filter")
     public ResponseEntity<Page<Event>> filterEventList(@RequestBody Event event,
                                                        @RequestParam(defaultValue = "0") int page,
                                                        @RequestParam(defaultValue = "5") int sizeP) {
-        System.out.println("CIAOOOOOOOOO" + ts.getPrincipalAttribute());
         String username = authenticationService.getUsername();
         Page<Event> result = eventController.filterEventList(event, page, sizeP, username);
 

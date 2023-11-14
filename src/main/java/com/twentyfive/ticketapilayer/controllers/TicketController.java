@@ -1,6 +1,5 @@
 package com.twentyfive.ticketapilayer.controllers;
 
-import com.twentyfive.authorizationflow.keycloak_config.TokenConverterProperties;
 import com.twentyfive.authorizationflow.services.AuthenticationService;
 import com.twentyfive.ticketapilayer.clients.InternalTicketController;
 import com.twentyfive.twentyfivemodel.filterTicket.TicketFilter;
@@ -25,13 +24,7 @@ public class TicketController {
     @Autowired
     private AuthenticationService authenticationService;
 
-    @Autowired
-    private TokenConverterProperties ts;
 
-    TicketController(){
-        System.out.println("CIAOOOOOOOOO" + ts.getPrincipalAttribute());
-
-    }
 
 
 
