@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 
-@ComponentScan(basePackages = {"com.twentyfive.authorizationcontroller", "com.twentyfive.ticketapilayer"})
+@ComponentScan(basePackages = {"com.twentyfive.authorizationflow", "com.twentyfive.ticketapilayer"})
 @SpringBootApplication
 @EnableFeignClients
 public class TicketApiLayerApplication {

@@ -15,7 +15,7 @@ public interface InternalAddressbookController {
     AddressBook deleteAddressBook(@PathVariable String id);
 
     @RequestMapping(method = RequestMethod.GET, value = "/allElement")
-    List<AddressBook> getAll();
+    List<AddressBook> getAll(@RequestParam("username") String username);
 
     @RequestMapping(method = RequestMethod.GET , value="/getById/{id}")
     AddressBook getById(@PathVariable String id);
@@ -30,17 +30,19 @@ public interface InternalAddressbookController {
     AddressBook getByEmail(@RequestParam("email") String email);
 
     @RequestMapping(method = RequestMethod.GET, value = "/findByUsername")
-    AddressBook getByUsername();
+    AddressBook getByUsername(@RequestParam("username") String username);
 
     @RequestMapping(method = RequestMethod.POST , value="/list")
     Page<AddressBook> getAdressbookList(@RequestBody AddressBookFilter filter,
                                         @RequestParam(defaultValue = "0") int page,
-                                        @RequestParam(defaultValue = "5") int size);
+                                        @RequestParam(defaultValue = "5") int size,
+                                        @RequestParam("username") String username);
 
     @RequestMapping(method = RequestMethod.POST, value = "/get/autocomplete")
     Page<AddressBook> filterAutocomplete(@RequestParam("filterObject") String filterObject,
                                          @RequestParam(defaultValue = "0") int page,
-                                         @RequestParam(defaultValue = "5") int size);
+                                         @RequestParam(defaultValue = "5") int size,
+                                         @RequestParam("username") String username);
 
     @RequestMapping(method = RequestMethod.PUT , value="/update/{id}")
     AddressBook updateAddressBook(@PathVariable String id, @RequestBody AddressBook addressBook);

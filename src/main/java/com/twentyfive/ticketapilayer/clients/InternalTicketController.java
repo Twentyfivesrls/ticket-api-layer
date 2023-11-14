@@ -1,12 +1,15 @@
 package com.twentyfive.ticketapilayer.clients;
 
 import com.twentyfive.twentyfivemodel.filterTicket.TicketFilter;
+import com.twentyfive.twentyfivemodel.models.ticketModels.Event;
 import com.twentyfive.twentyfivemodel.models.ticketModels.Ticket;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.data.domain.Page;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @FeignClient(name = "InternalTicketController", url = "http://tomcat-twentyfive-db:8091/twentyfive-db/ticket")
@@ -17,17 +20,20 @@ public interface InternalTicketController {
                           @RequestParam("id") String id,
                           @RequestParam("name") String name,
                           @RequestParam("lastName") String lastName,
-                          @RequestParam("email") String email);
+                          @RequestParam("email") String email,
+                          @RequestParam("username") String username);
 
     @RequestMapping(method = RequestMethod.POST, value="/list")
     Page<Ticket> getTicketList(@RequestBody TicketFilter ticket,
                                @RequestParam(defaultValue = "0") int page,
-                               @RequestParam(defaultValue = "5") int size);
+                               @RequestParam(defaultValue = "5") int size,
+                               @RequestParam String username);
 
     @RequestMapping(method = RequestMethod.POST, value = "/get/autocomplete")
     Page<Ticket> filterAutocomplete(@RequestParam("filterObject") String filterObject,
                                     @RequestParam(defaultValue = "0") int page,
-                                    @RequestParam(defaultValue = "5") int size);
+                                    @RequestParam(defaultValue = "5") int size,
+                                    @RequestParam("username") String username);
 
     @RequestMapping(method = RequestMethod.GET, value="/getTicketById/{id}")
     Ticket getTicketById(@PathVariable String id);
@@ -57,5 +63,5 @@ public interface InternalTicketController {
     byte[] generateQrCode(@RequestParam("url") String url);
 
     @RequestMapping(method = RequestMethod.GET, value="/find/all")
-    List<Ticket> findAll();
+    List<Ticket> findAll(@RequestParam("username") String username);
 }
