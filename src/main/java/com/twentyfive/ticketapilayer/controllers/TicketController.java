@@ -62,6 +62,13 @@ public class TicketController {
         return ResponseEntity.ok().body(result);
     }
 
+    @GetMapping("/getALl/tickets/by/event")
+    public ResponseEntity<Page<Ticket>> getTicketsByIdEvent(@RequestParam("eventId") String eventId, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
+        String username = authenticationService.getUsername();
+        Page<Ticket> result = ticketController.getTicketsByIdEvent(eventId,page,size,username);
+        return ResponseEntity.ok().body(result);
+    }
+
     @GetMapping("/getTicketById/{id}")
     public ResponseEntity<Object> getTicketById(@PathVariable String id) {
         String username = authenticationService.getUsername();
