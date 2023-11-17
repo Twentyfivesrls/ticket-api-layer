@@ -18,7 +18,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
-@PreAuthorize("hasRole('ROLE_single_realm_role')")
 @RequestMapping("/event")
 @CrossOrigin(origins = "*")
 public class EventController {
@@ -30,7 +29,7 @@ public class EventController {
     @Autowired
     private AuthenticationService authenticationService;
 
-
+    @PreAuthorize("hasRole('ROLE_single_realm_role')")
     @PostMapping("/filter")
     public ResponseEntity<Page<Event>> filterEventList(@RequestBody Event event,
                                                        @RequestParam(defaultValue = "0") int page,
@@ -41,6 +40,7 @@ public class EventController {
         return ResponseEntity.ok().body(result);
     }
 
+    @PreAuthorize("hasRole('ROLE_single_realm_role')")
     @PostMapping("/filter/event/autocomplete")
     public ResponseEntity<Page<Event>> filterEventAutocomplete(@RequestParam("filterObject") String filterObject,
                                                                @RequestParam(defaultValue = "0") int page,
@@ -52,6 +52,8 @@ public class EventController {
         return ResponseEntity.ok().body(result);
     }
 
+
+    @PreAuthorize("hasRole('ROLE_single_realm_role')")
     @GetMapping("/list")
     public ResponseEntity<Object> getEventList() {
         String username = authenticationService.getUsername();
@@ -59,6 +61,8 @@ public class EventController {
         return ResponseEntity.ok().body(result);
     }
 
+
+    @PreAuthorize("hasRole('ROLE_single_realm_role')")
     @PostMapping("/save")
     public ResponseEntity<Object> saveEvent(@RequestBody Event event) {
         String username = authenticationService.getUsername();
@@ -69,6 +73,8 @@ public class EventController {
         return ResponseEntity.ok().body(result);
     }
 
+
+    @PreAuthorize("hasRole('ROLE_single_realm_role')")
     @GetMapping("/get/{id}")
     public ResponseEntity<Object> getEventById(@PathVariable String id) {
         String username = authenticationService.getUsername();
@@ -85,6 +91,7 @@ public class EventController {
                 .body(result);
     }
 
+    @PreAuthorize("hasRole('ROLE_single_realm_role')")
     @PutMapping("/update/{id}/{status}")
     public ResponseEntity<Object> updateEvent(@PathVariable String id, @PathVariable Boolean status) {
         String username = authenticationService.getUsername();
@@ -92,6 +99,7 @@ public class EventController {
         return ResponseEntity.ok().body(result);
     }
 
+    @PreAuthorize("hasRole('ROLE_single_realm_role')")
     @PutMapping("/update/{id}")
     public ResponseEntity<Object> updateEventById(@PathVariable String id, @RequestBody Event event) {
         String username = authenticationService.getUsername();
@@ -99,6 +107,7 @@ public class EventController {
         return ResponseEntity.ok().body(result);
     }
 
+    @PreAuthorize("hasRole('ROLE_single_realm_role')")
     @GetMapping("/get/event/byFields")
     public ResponseEntity<Event> getEventByField(@RequestParam("name") String name,
                                                  @RequestParam("description") String description,
@@ -122,6 +131,7 @@ public class EventController {
         return ResponseEntity.ok().body(result);
     }
 
+    @PreAuthorize("hasRole('ROLE_single_realm_role')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Event> deleteEvent(@PathVariable String id){
         String username = authenticationService.getUsername();
