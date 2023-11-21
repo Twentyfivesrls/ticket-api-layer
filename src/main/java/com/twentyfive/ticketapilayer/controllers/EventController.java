@@ -2,6 +2,7 @@ package com.twentyfive.ticketapilayer.controllers;
 
 import com.twentyfive.authorizationflow.services.AuthenticationService;
 import com.twentyfive.ticketapilayer.clients.InternalEventController;
+import com.twentyfive.twentyfivemodel.filterTicket.EventFilter;
 import com.twentyfive.twentyfivemodel.models.ticketModels.Event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -31,7 +32,7 @@ public class EventController {
 
     @PreAuthorize("hasRole('ROLE_single_realm_role')")
     @PostMapping("/filter")
-    public ResponseEntity<Page<Event>> filterEventList(@RequestBody Event event,
+    public ResponseEntity<Page<Event>> filterEventList(@RequestBody EventFilter event,
                                                        @RequestParam(defaultValue = "0") int page,
                                                        @RequestParam(defaultValue = "5") int sizeP) {
         System.out.println("EVENTO   :" + event);
