@@ -32,7 +32,7 @@ public class EventController {
 
     @PreAuthorize("hasRole('ROLE_single_realm_role')")
     @PostMapping("/filter")
-    public ResponseEntity<Page<Event>> filterEventList(@RequestBody EventFilter event,
+    public ResponseEntity<Page<Event>> filterEventList(@RequestBody Event event,
                                                        @RequestParam(defaultValue = "0") int page,
                                                        @RequestParam(defaultValue = "5") int sizeP) {
         System.out.println("EVENTO   :" + event);
