@@ -25,7 +25,7 @@ public class TicketController {
     private AuthenticationService authenticationService;
 
 
-
+    @PreAuthorize("hasRole('ROLE_single_realm_role')")
     @PostMapping("/generate")
     public ResponseEntity<Object> generateTicket(@RequestBody Ticket ticket,
                                                  @RequestParam("id") String id,
@@ -39,7 +39,7 @@ public class TicketController {
         return ResponseEntity.ok().body(result);
     }
 
-
+    @PreAuthorize("hasRole('ROLE_single_realm_role')")
     @PostMapping("/list")
     public ResponseEntity<Object> getTicketList(@RequestBody TicketFilter ticket,
                                                 @RequestParam(defaultValue = "0") int page,
@@ -51,6 +51,7 @@ public class TicketController {
         return ResponseEntity.ok().body(result);
     }
 
+    @PreAuthorize("hasRole('ROLE_single_realm_role')")
     @PostMapping("/get/autocomplete")
     public ResponseEntity<Page<Ticket>> filterEventAutocomplete(@RequestParam("filterObject") String filterObject,
                                                                 @RequestParam(defaultValue = "0") int page,
@@ -62,6 +63,7 @@ public class TicketController {
         return ResponseEntity.ok().body(result);
     }
 
+    @PreAuthorize("hasRole('ROLE_single_realm_role')")
     @GetMapping("/getALl/tickets/by/event")
     public ResponseEntity<Page<Ticket>> getTicketsByIdEvent(@RequestParam("eventId") String eventId, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
         String username = authenticationService.getUsername();
@@ -69,6 +71,7 @@ public class TicketController {
         return ResponseEntity.ok().body(result);
     }
 
+    @PreAuthorize("hasRole('ROLE_single_realm_role')")
     @GetMapping("/getTicketById/{id}")
     public ResponseEntity<Object> getTicketById(@PathVariable String id) {
         String username = authenticationService.getUsername();
@@ -76,12 +79,14 @@ public class TicketController {
         return ResponseEntity.ok().body(result);
     }
 
+    @PreAuthorize("hasRole('ROLE_single_realm_role')")
     @GetMapping("/getTicket/byCode/{code}")
     public ResponseEntity<Ticket> getTicketByCode(@PathVariable String code) {
         Ticket result = ticketController.getTickedByCode(code);
         return ResponseEntity.ok().body(result);
     }
 
+    @PreAuthorize("hasRole('ROLE_single_realm_role')")
     @PutMapping("/setStatus/{id}/{status}")
     public ResponseEntity<Object> setStatus(@PathVariable String id, @PathVariable Boolean status) {
         String username = authenticationService.getUsername();
@@ -89,6 +94,7 @@ public class TicketController {
         return ResponseEntity.ok().body(result);
     }
 
+    @PreAuthorize("hasRole('ROLE_single_realm_role')")
     @PutMapping("update/usedTicket/{id}/{used}")
     public ResponseEntity<Object> setUsed(@PathVariable String id, @PathVariable Boolean used) {
         String username = authenticationService.getUsername();
@@ -96,6 +102,7 @@ public class TicketController {
         return ResponseEntity.ok().body(result);
     }
 
+    @PreAuthorize("hasRole('ROLE_single_realm_role')")
     @DeleteMapping("/delete")
     public ResponseEntity<Object> deleteTicket(@RequestParam("id") String id) {
         String username = authenticationService.getUsername();
@@ -111,7 +118,7 @@ public class TicketController {
                 .header("Content-Disposition", "attachment; filename=exported_data.xlsx")
                 .body(result);
     }
-
+    @PreAuthorize("hasRole('ROLE_single_realm_role')")
     @GetMapping("/getBy/eventName/{eventName}")
     public ResponseEntity<Object> getTicketByEventName(@PathVariable String eventName) {
         String username = authenticationService.getUsername();
@@ -119,6 +126,7 @@ public class TicketController {
         return ResponseEntity.ok().body(result);
     }
 
+    @PreAuthorize("hasRole('ROLE_single_realm_role')")
     @GetMapping("/getBy/ticket/isUsed/{isUsed}")
     public ResponseEntity<Object> getTicketByIsUsed(@PathVariable Boolean isUsed) {
         String username = authenticationService.getUsername();
@@ -133,7 +141,7 @@ public class TicketController {
         return ResponseEntity.ok().body(result);
     }
 
-    //@PreAuthorize("hasRole('ROLE_single_realm_role')")
+    @PreAuthorize("hasRole('ROLE_single_realm_role')")
     @GetMapping("/find/all")
     public ResponseEntity<Object> findAll() {
         String username = authenticationService.getUsername();
