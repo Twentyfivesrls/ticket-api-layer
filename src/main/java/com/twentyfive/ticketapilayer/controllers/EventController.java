@@ -35,7 +35,7 @@ public class EventController {
     public ResponseEntity<Page<Event>> filterEventList(@RequestBody Event event,
                                                        @RequestParam(defaultValue = "0") int page,
                                                        @RequestParam(defaultValue = "5") int sizeP) {
-        System.out.println("EVENTO   :" + event);
+        System.out.println("sizeP   :" + sizeP);
         String username = authenticationService.getUsername();
         Page<Event> result = eventController.filterEventList(event, page, sizeP, username);
         System.out.println("RESULT   :" + result);
