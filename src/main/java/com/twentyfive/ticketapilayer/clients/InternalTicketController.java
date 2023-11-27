@@ -24,7 +24,7 @@ public interface InternalTicketController {
                           @RequestParam("username") String username);
 
     @RequestMapping(method = RequestMethod.POST, value="/list")
-    Page<Ticket> getTicketList(@RequestBody TicketFilter ticket,
+    Page<Ticket> getTicketList(@RequestBody Ticket ticket,
                                @RequestParam(defaultValue = "0") int page,
                                @RequestParam(defaultValue = "5") int size,
                                @RequestParam String username);

@@ -41,13 +41,11 @@ public class TicketController {
 
     @PreAuthorize("hasRole('ROLE_single_realm_role')")
     @PostMapping("/list")
-    public ResponseEntity<Object> getTicketList(@RequestBody TicketFilter ticket,
+    public ResponseEntity<Object> getTicketList(@RequestBody Ticket ticket,
                                                 @RequestParam(defaultValue = "0") int page,
                                                 @RequestParam(defaultValue = "5") int size) {
         String username = authenticationService.getUsername();
         Page<Ticket> result = ticketController.getTicketList(ticket, page, size, username);
-        System.out.println("Sono nel layer, questo è lo username");
-        System.out.println(username);
         return ResponseEntity.ok().body(result);
     }
 
