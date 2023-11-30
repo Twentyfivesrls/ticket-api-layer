@@ -88,8 +88,9 @@ public class EventController {
     public ResponseEntity<Object> downloadExcel(@PathVariable String userId) {
         String username = authenticationService.getUsername();
         byte[] result = eventController.downloadExcel(userId);
+        LocalDateTime dateTime = LocalDateTime.now();
         return ResponseEntity.ok()
-                .header("Content-Disposition", "attachment; filename=exported_data.xlsx")
+                .header("Content-Disposition", "attachment; filename=Lista_Ticket_" + dateTime + ".xlsx")
                 .body(result);
     }
 
