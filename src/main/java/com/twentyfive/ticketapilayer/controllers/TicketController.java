@@ -114,11 +114,8 @@ public class TicketController {
     public ResponseEntity<Object> downloadExcel(@PathVariable String userId) {
         String username = authenticationService.getUsername();
         byte[] result = ticketController.downloadExcel(userId);
-        LocalDateTime dateTime = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
-        String formattedDateTime = dateTime.format(formatter);
         return ResponseEntity.ok()
-                .header("Content-Disposition", "attachment; filename=Lista_Ticket_" + formattedDateTime + ".xlsx")
+                .header("Content-Disposition", "attachment; filename=export_data.xlsx")
                 .body(result);
     }
     @PreAuthorize("hasRole('ROLE_single_realm_role')")
