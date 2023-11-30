@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -88,7 +89,7 @@ public class EventController {
     public ResponseEntity<Object> downloadExcel(@PathVariable String userId) {
         String username = authenticationService.getUsername();
         byte[] result = eventController.downloadExcel(userId);
-        LocalDateTime dateTime = LocalDateTime.now();
+        LocalDateTime dateTime = LocalDateTime.now(ZoneId.systemDefault());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
         String formattedDateTime = dateTime.format(formatter);
         return ResponseEntity.ok()
