@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
@@ -111,8 +113,11 @@ public class TicketController {
     public ResponseEntity<Object> downloadExcel(@PathVariable String userId) {
         String username = authenticationService.getUsername();
         byte[] result = ticketController.downloadExcel(userId);
+        LocalDateTime dateTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
+        String formattedDateTime = dateTime.format(formatter);
         return ResponseEntity.ok()
-                .header("Content-Disposition", "attachment; filename=exported_data.xlsx")
+                .header("Content-Disposition", "attachment; filename=Lista_Ticket_" + formattedDateTime + ".xlsx")
                 .body(result);
     }
     @PreAuthorize("hasRole('ROLE_single_realm_role')")

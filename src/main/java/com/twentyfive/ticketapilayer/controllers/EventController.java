@@ -89,8 +89,10 @@ public class EventController {
         String username = authenticationService.getUsername();
         byte[] result = eventController.downloadExcel(userId);
         LocalDateTime dateTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
+        String formattedDateTime = dateTime.format(formatter);
         return ResponseEntity.ok()
-                .header("Content-Disposition", "attachment; filename=Lista_Ticket_" + dateTime + ".xlsx")
+                .header("Content-Disposition", "attachment; filename=Lista_Eventi_" + formattedDateTime + ".xlsx")
                 .body(result);
     }
 
