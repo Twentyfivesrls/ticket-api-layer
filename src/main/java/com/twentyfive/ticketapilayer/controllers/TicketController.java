@@ -154,15 +154,14 @@ public class TicketController {
     }
     @PreAuthorize("hasRole('ROLE_single_realm_role')")
     @PostMapping("/testing")
-    public ResponseEntity<Page<Ticket>> testaggioMatto(@RequestParam(required = false) String userId,
-                                                       @RequestParam(required = false) String email,
+    public ResponseEntity<Page<Ticket>> testaggioMatto(@RequestParam(required = false) String email,
                                                        @RequestParam(required = false) String eventName,
                                                        @RequestParam(required = false) LocalDateTime startDate,
                                                        @RequestParam(required = false) LocalDateTime endDate,
                                                        @RequestParam("page") int page,
                                                        @RequestParam("dimension") int dimension){
         String username = authenticationService.getUsername();
-        Page<Ticket> result = ticketController.testaggioMatto(userId,email,eventName,startDate,endDate, page, dimension, username);
+        Page<Ticket> result = ticketController.testaggioMatto(username,email,eventName,startDate,endDate, page, dimension);
         return ResponseEntity.ok().body(result);
     }
 }
