@@ -70,5 +70,12 @@ public interface InternalTicketController {
     @RequestMapping(method = RequestMethod.GET, value="/find/all")
     List<Ticket> findAll(@RequestParam("username") String username);
     @RequestMapping(method = RequestMethod.POST, value="/testing")
-    Page<Ticket> testaggioMatto(@RequestBody Ticket filterObject, @RequestParam("page") int page, @RequestParam("dimension") int dimension, @RequestParam("username") String username);
+    Page<Ticket> testaggioMatto(@RequestParam(required = false) String userId,
+                                @RequestParam(required = false) String email,
+                                @RequestParam(required = false) String eventName,
+                                @RequestParam(required = false) LocalDateTime startDate,
+                                @RequestParam(required = false) LocalDateTime endDate,
+                                @RequestParam("page") int page,
+                                @RequestParam("dimension") int dimension,
+                                @RequestParam("username") String username);
 }
