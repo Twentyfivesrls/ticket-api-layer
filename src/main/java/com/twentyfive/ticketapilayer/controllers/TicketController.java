@@ -6,6 +6,7 @@ import com.twentyfive.twentyfivemodel.filterTicket.TicketFilter;
 import com.twentyfive.twentyfivemodel.models.ticketModels.Ticket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -151,5 +152,11 @@ public class TicketController {
         List<Ticket> result = ticketController.findAll(username);
         return ResponseEntity.ok().body(result);
     }
-
+    @PreAuthorize("hasRole('ROLE_single_realm_role')")
+    @PostMapping("/testing")
+    public ResponseEntity<Page<Ticket>> testaggioMatto(@RequestBody Ticket ticket, @RequestParam("page") int page, @RequestParam("dimension") int dimension){
+        String username = authenticationService.getUsername();
+        Page<Ticket> result = ticketController.testaggioMatto(ticket, page, dimension, username);
+        return ResponseEntity.ok().body(result);
+    }
 }

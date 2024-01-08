@@ -6,7 +6,9 @@ import com.twentyfive.twentyfivemodel.models.ticketModels.Ticket;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -67,4 +69,6 @@ public interface InternalTicketController {
 
     @RequestMapping(method = RequestMethod.GET, value="/find/all")
     List<Ticket> findAll(@RequestParam("username") String username);
+    @RequestMapping(method = RequestMethod.POST, value="/testing")
+    Page<Ticket> testaggioMatto(@RequestBody Ticket filterObject, @RequestParam("page") int page, @RequestParam("dimension") int dimension, @RequestParam("username") String username);
 }
