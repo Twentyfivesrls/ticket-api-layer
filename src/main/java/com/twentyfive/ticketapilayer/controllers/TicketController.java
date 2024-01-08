@@ -160,8 +160,8 @@ public class TicketController {
                                                        @RequestParam(required = false) LocalDateTime endDate,
                                                        @RequestParam("page") int page,
                                                        @RequestParam("dimension") int dimension){
-        String username = authenticationService.getUsername();
-        Page<Ticket> result = ticketController.testaggioMatto(username,email,eventName,startDate,endDate, page, dimension);
+        String userId = authenticationService.getUsername();
+        Page<Ticket> result = ticketController.testaggioMatto(userId,email,eventName,startDate,endDate, page, dimension);
         return ResponseEntity.ok().body(result);
     }
 }
