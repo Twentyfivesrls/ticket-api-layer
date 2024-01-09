@@ -152,13 +152,4 @@ public class TicketController {
         List<Ticket> result = ticketController.findAll(username);
         return ResponseEntity.ok().body(result);
     }
-    @PreAuthorize("hasRole('ROLE_single_realm_role')")
-    @PostMapping("/testing")
-    public ResponseEntity<Page<Ticket>> testaggioMatto(@RequestBody Ticket ticket,
-                                                       @RequestParam("page") int page,
-                                                       @RequestParam("dimension") int dimension){
-        String username = authenticationService.getUsername();
-        Page<Ticket> result = ticketController.testaggioMatto(ticket, page, dimension,username);
-        return ResponseEntity.ok().body(result);
-    }
 }
