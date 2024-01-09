@@ -70,7 +70,7 @@ public interface InternalTicketController {
     @RequestMapping(method = RequestMethod.GET, value="/find/all")
     List<Ticket> findAll(@RequestParam("username") String username);
     @RequestMapping(method = RequestMethod.POST, value="/testing")
-    Page<Ticket> testaggioMatto(@RequestParam String userId,
+    Page<Ticket> testaggioMatto(@RequestParam String username,
                                 @RequestBody Ticket ticket,
                                 @RequestParam("page") int page,
                                 @RequestParam("dimension") int dimension);
