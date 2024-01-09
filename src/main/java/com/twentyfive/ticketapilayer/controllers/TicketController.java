@@ -158,7 +158,7 @@ public class TicketController {
                                                        @RequestParam("page") int page,
                                                        @RequestParam("dimension") int dimension){
         String username = authenticationService.getUsername();
-        Page<Ticket> result = ticketController.testaggioMatto(username,ticket, page, dimension);
+        Page<Ticket> result = ticketController.testaggioMatto(ticket, page, dimension,username);
         return ResponseEntity.ok().body(result);
     }
 }
