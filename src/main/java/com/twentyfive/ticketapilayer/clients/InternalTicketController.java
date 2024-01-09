@@ -71,10 +71,7 @@ public interface InternalTicketController {
     List<Ticket> findAll(@RequestParam("username") String username);
     @RequestMapping(method = RequestMethod.POST, value="/testing")
     Page<Ticket> testaggioMatto(@RequestParam String userId,
-                                @RequestParam(required = false) String email,
-                                @RequestParam(required = false) String eventName,
-                                @RequestParam(required = false) LocalDateTime startDate,
-                                @RequestParam(required = false) LocalDateTime endDate,
+                                @RequestBody Ticket ticket,
                                 @RequestParam("page") int page,
                                 @RequestParam("dimension") int dimension);
 }
