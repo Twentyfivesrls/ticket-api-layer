@@ -1,6 +1,6 @@
 package com.twentyfive.ticketapilayer.clients;
 
-import com.twentyfive.twentyfivemodel.filterTicket.EventFilter;
+import com.twentyfive.twentyfivemodel.filterTicket.AutoCompleteRes;
 import com.twentyfive.twentyfivemodel.models.ticketModels.Event;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.data.domain.Page;
@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 @FeignClient(name = "InternalEventController", url = "http://tomcat-twentyfive-db:8091/twentyfive-db/event")
 public interface InternalEventController {
@@ -20,10 +21,8 @@ public interface InternalEventController {
                                 @RequestParam("username") String username);
 
     @RequestMapping(method = RequestMethod.POST, value = "/filter/event/autocomplete")
-    Page<Event> filterAutocomplete(@RequestParam("filterObject") String filterObject,
-                                   @RequestParam(defaultValue = "0") int page,
-                                   @RequestParam(defaultValue = "5") int size,
-                                   @RequestParam("username") String username);
+    Set<AutoCompleteRes> filterAutocomplete(@RequestParam("filterObject") String filterObject,
+                                            @RequestParam("username") String username);
 
     @RequestMapping(method = RequestMethod.GET, value="/list")
     List<Event> getEventList(@RequestParam("username") String username);

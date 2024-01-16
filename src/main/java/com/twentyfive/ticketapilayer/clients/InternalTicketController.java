@@ -1,5 +1,6 @@
 package com.twentyfive.ticketapilayer.clients;
 
+import com.twentyfive.twentyfivemodel.filterTicket.AutoCompleteRes;
 import com.twentyfive.twentyfivemodel.filterTicket.TicketFilter;
 import com.twentyfive.twentyfivemodel.models.ticketModels.Event;
 import com.twentyfive.twentyfivemodel.models.ticketModels.Ticket;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 @FeignClient(name = "InternalTicketController", url = "http://tomcat-twentyfive-db:8091/twentyfive-db/ticket")
 public interface InternalTicketController {
@@ -32,10 +34,8 @@ public interface InternalTicketController {
                                @RequestParam String username);
 
     @RequestMapping(method = RequestMethod.POST, value = "/get/autocomplete")
-    Page<Ticket> filterAutocomplete(@RequestParam("filterObject") String filterObject,
-                                    @RequestParam(defaultValue = "0") int page,
-                                    @RequestParam(defaultValue = "5") int size,
-                                    @RequestParam("username") String username);
+    Set<AutoCompleteRes> filterAutocomplete(@RequestParam("filterObject") String filterObject,
+                                            @RequestParam("username") String username);
 
     @RequestMapping(method = RequestMethod.GET, value = "/getALl/tickets/by/event")
     Page<Ticket> getTicketsByIdEvent(@RequestParam("eventId") String eventId, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size, @RequestParam("username") String username);

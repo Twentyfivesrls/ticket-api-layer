@@ -2,6 +2,7 @@ package com.twentyfive.ticketapilayer.controllers;
 
 import com.twentyfive.authorizationflow.services.AuthenticationService;
 import com.twentyfive.ticketapilayer.clients.InternalTicketController;
+import com.twentyfive.twentyfivemodel.filterTicket.AutoCompleteRes;
 import com.twentyfive.twentyfivemodel.filterTicket.TicketFilter;
 import com.twentyfive.twentyfivemodel.models.ticketModels.Ticket;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/ticket")
@@ -54,12 +56,10 @@ public class TicketController {
 
     @PreAuthorize("hasRole('ROLE_single_realm_role')")
     @PostMapping("/get/autocomplete")
-    public ResponseEntity<Page<Ticket>> filterEventAutocomplete(@RequestParam("filterObject") String filterObject,
-                                                                @RequestParam(defaultValue = "0") int page,
-                                                                @RequestParam(defaultValue = "5") int size) {
+    public ResponseEntity<Set<AutoCompleteRes>> filterEventAutocomplete(@RequestParam("filterObject") String filterObject) {
 
         String username = authenticationService.getUsername();
-        Page<Ticket> result = ticketController.filterAutocomplete(filterObject, page, size, username);
+        Set<AutoCompleteRes> result = ticketController.filterAutocomplete(filterObject, username);
 
         return ResponseEntity.ok().body(result);
     }
