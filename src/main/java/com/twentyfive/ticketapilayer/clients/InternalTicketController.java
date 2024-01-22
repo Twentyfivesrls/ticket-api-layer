@@ -1,5 +1,6 @@
 package com.twentyfive.ticketapilayer.clients;
 
+import com.twentyfive.twentyfivemodel.dto.ticketDto.TicketAndAddressBook;
 import com.twentyfive.twentyfivemodel.filterTicket.AutoCompleteRes;
 import com.twentyfive.twentyfivemodel.filterTicket.TicketFilter;
 import com.twentyfive.twentyfivemodel.models.ticketModels.Event;
@@ -20,11 +21,7 @@ import java.util.Set;
 public interface InternalTicketController {
 
     @RequestMapping(method = RequestMethod.POST, value="/generate")
-    Ticket generateTicket(@RequestBody Ticket ticket,
-                          @RequestParam("id") String id,
-                          @RequestParam("name") String name,
-                          @RequestParam("lastName") String lastName,
-                          @RequestParam("email") String email,
+    Ticket generateTicket(@RequestBody TicketAndAddressBook ticket,
                           @RequestParam("username") String username);
 
     @RequestMapping(method = RequestMethod.POST, value="/list")

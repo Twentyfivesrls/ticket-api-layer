@@ -2,6 +2,7 @@ package com.twentyfive.ticketapilayer.controllers;
 
 import com.twentyfive.authorizationflow.services.AuthenticationService;
 import com.twentyfive.ticketapilayer.clients.InternalTicketController;
+import com.twentyfive.twentyfivemodel.dto.ticketDto.TicketAndAddressBook;
 import com.twentyfive.twentyfivemodel.filterTicket.AutoCompleteRes;
 import com.twentyfive.twentyfivemodel.filterTicket.TicketFilter;
 import com.twentyfive.twentyfivemodel.models.ticketModels.Ticket;
@@ -33,14 +34,9 @@ public class TicketController {
 
     @PreAuthorize("hasRole('ROLE_single_realm_role')")
     @PostMapping("/generate")
-    public ResponseEntity<Object> generateTicket(@RequestBody Ticket ticket,
-                                                 @RequestParam("id") String id,
-                                                 @RequestParam("name") String name,
-                                                 @RequestParam("lastName") String lastName,
-                                                 @RequestParam("email") String email) {
+    public ResponseEntity<Object> generateTicket(@RequestBody TicketAndAddressBook ticket) {
         String username = authenticationService.getUsername();
-        ticket.setUserId(username);
-        Ticket result = ticketController.generateTicket(ticket,id, name, lastName, email, username);
+        Ticket result = ticketController.generateTicket(ticket, username);
         return ResponseEntity.ok().body(result);
     }
 
