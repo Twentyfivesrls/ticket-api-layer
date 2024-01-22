@@ -66,4 +66,7 @@ public interface InternalTicketController {
 
     @RequestMapping(method = RequestMethod.GET, value="/find/all")
     List<Ticket> findAll(@RequestParam("username") String username);
+
+    @RequestMapping(method = RequestMethod.GET, value="/countRubrica")
+    long countRubrica(@RequestParam("username") String username);
 }
