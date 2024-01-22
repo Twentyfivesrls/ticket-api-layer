@@ -117,4 +117,11 @@ public class AddressbookController {
         return ResponseEntity.ok().body(result);
     }
 
+    @PreAuthorize("hasRole('ROLE_single_realm_role')")
+    @GetMapping("/countRubrica")
+    public ResponseEntity<Object> countRubrica() {
+        String username = authenticationService.getUsername();
+        long count = addressbookController.countRubrica(username);
+        return ResponseEntity.ok().body(count);
+    }
 }

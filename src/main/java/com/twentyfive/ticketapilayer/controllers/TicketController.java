@@ -148,12 +148,4 @@ public class TicketController {
         List<Ticket> result = ticketController.findAll(username);
         return ResponseEntity.ok().body(result);
     }
-
-    @PreAuthorize("hasRole('ROLE_single_realm_role')")
-    @GetMapping("/countRubrica")
-    public ResponseEntity<Object> countRubrica() {
-        String username = authenticationService.getUsername();
-        long count = ticketController.countRubrica(username);
-        return ResponseEntity.ok().body(count);
-    }
 }

@@ -49,4 +49,7 @@ public interface InternalAddressbookController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/save/addressbook")
     AddressBook saveAddressbook(@RequestBody AddressBook addressBook);
+
+    @RequestMapping(method = RequestMethod.GET, value="/countRubrica")
+    long countRubrica(@RequestParam("username") String username);
 }
