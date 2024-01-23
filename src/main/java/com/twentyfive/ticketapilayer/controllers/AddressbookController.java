@@ -3,6 +3,7 @@ package com.twentyfive.ticketapilayer.controllers;
 import com.twentyfive.authorizationflow.services.AuthenticationService;
 import com.twentyfive.ticketapilayer.clients.InternalAddressbookController;
 import com.twentyfive.twentyfivemodel.filterTicket.AddressBookFilter;
+import com.twentyfive.twentyfivemodel.filterTicket.AutoCompleteRes;
 import com.twentyfive.twentyfivemodel.models.ticketModels.AddressBook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -11,6 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @PreAuthorize("hasRole('ROLE_single_realm_role')")
@@ -91,12 +93,10 @@ public class AddressbookController {
     }
 
     @PostMapping("/get/autocomplete")
-    public ResponseEntity<Page<AddressBook>> filterEventAutocomplete(@RequestParam("filterObject") String filterObject,
-                                                                     @RequestParam(defaultValue = "0") int page,
-                                                                     @RequestParam(defaultValue = "5") int size) {
+    public ResponseEntity<Set<AutoCompleteRes>> filterEventAutocomplete(@RequestParam("filterObject") String filterObject) {
 
         String username = authenticationService.getUsername();
-        Page<AddressBook> result = addressbookController.filterAutocomplete(filterObject, page, size, username);
+        Set<AutoCompleteRes> result = addressbookController.filterAutocomplete(filterObject, username);
 
         return ResponseEntity.ok().body(result);
     }

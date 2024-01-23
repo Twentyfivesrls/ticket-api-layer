@@ -1,12 +1,14 @@
 package com.twentyfive.ticketapilayer.clients;
 
 import com.twentyfive.twentyfivemodel.filterTicket.AddressBookFilter;
+import com.twentyfive.twentyfivemodel.filterTicket.AutoCompleteRes;
 import com.twentyfive.twentyfivemodel.models.ticketModels.AddressBook;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.data.domain.Page;
 import java.util.List;
+import java.util.Set;
 
 @FeignClient(name = "InternalAddressbookController", url = "http://tomcat-twentyfive-db:8091/twentyfive-db/addressbook")
 public interface InternalAddressbookController {
@@ -39,10 +41,8 @@ public interface InternalAddressbookController {
                                         @RequestParam("username") String username);
 
     @RequestMapping(method = RequestMethod.POST, value = "/get/autocomplete")
-    Page<AddressBook> filterAutocomplete(@RequestParam("filterObject") String filterObject,
-                                         @RequestParam(defaultValue = "0") int page,
-                                         @RequestParam(defaultValue = "5") int size,
-                                         @RequestParam("username") String username);
+    Set<AutoCompleteRes> filterAutocomplete(@RequestParam("filterObject") String filterObject,
+                                            @RequestParam("username") String username);
 
     @RequestMapping(method = RequestMethod.PUT , value="/update/{id}")
     AddressBook updateAddressBook(@PathVariable String id, @RequestBody AddressBook addressBook);
