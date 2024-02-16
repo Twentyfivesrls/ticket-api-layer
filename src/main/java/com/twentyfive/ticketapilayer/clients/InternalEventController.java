@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
-@FeignClient(name = "InternalEventController", url = "http://tomcat-twentyfive-db:8091/twentyfive-db/event")
+@FeignClient(name = "InternalEventController", url = "${twentyfive.db.url}/event")
 public interface InternalEventController {
 
     @RequestMapping(method = RequestMethod.POST, value="/filter")
@@ -19,6 +19,11 @@ public interface InternalEventController {
                                 @RequestParam(defaultValue = "0") int page,
                                 @RequestParam(defaultValue = "5") int size,
                                 @RequestParam("username") String username);
+
+    @RequestMapping(method = RequestMethod.POST, value="/page")
+    Page<Event> pageEvents(@RequestParam(defaultValue = "0") int page,
+                           @RequestParam(defaultValue = "5") int size,
+                           @RequestParam("username") String username);
 
     @RequestMapping(method = RequestMethod.POST, value = "/filter/event/autocomplete")
     Set<AutoCompleteRes> filterAutocomplete(@RequestParam("filterObject") String filterObject,

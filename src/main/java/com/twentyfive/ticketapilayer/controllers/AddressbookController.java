@@ -5,7 +5,6 @@ import com.twentyfive.ticketapilayer.clients.InternalAddressbookController;
 import com.twentyfive.twentyfivemodel.filterTicket.AddressBookFilter;
 import com.twentyfive.twentyfivemodel.filterTicket.AutoCompleteRes;
 import com.twentyfive.twentyfivemodel.models.ticketModels.AddressBook;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -15,17 +14,18 @@ import java.util.List;
 import java.util.Set;
 
 @RestController
-@PreAuthorize("hasRole('ROLE_single_realm_role')")
+//@PreAuthorize("hasRole('ROLE_single_realm_role')")
 @RequestMapping("/addressbook")
 @CrossOrigin(origins = "*")
 public class AddressbookController {
 
-    @Autowired
-    private InternalAddressbookController addressbookController;
+    private final InternalAddressbookController addressbookController;
+    private final AuthenticationService authenticationService;
 
-
-    @Autowired
-    private AuthenticationService authenticationService;
+    public AddressbookController(InternalAddressbookController addressbookController, AuthenticationService authenticationService) {
+        this.addressbookController = addressbookController;
+        this.authenticationService = authenticationService;
+    }
 
     @GetMapping("/allElement")
     public ResponseEntity<List<AddressBook>> getAll(){
@@ -76,19 +76,20 @@ public class AddressbookController {
         return ResponseEntity.ok().body(result);
     }
 
-   /* @GetMapping("/total-list")
-    public ResponseEntity<Object> getEventList() {
-        String username = authenticationService.getUsername();
-        List<AddressBook> result = addressbookController.getEAddressBookList(username);
-        return ResponseEntity.ok().body(result);
-    }*/
-
     @PostMapping("/list")
-    public ResponseEntity<Object> getAdressbookList(@RequestBody AddressBookFilter filter,
+    public ResponseEntity<Object> getAddressbookList(@RequestBody AddressBookFilter filter,
                                                     @RequestParam(defaultValue = "0") int page,
                                                     @RequestParam(defaultValue = "5") int sizeP) {
         String username = authenticationService.getUsername();
-        Page<AddressBook> result = addressbookController.getAdressbookList(filter, page, sizeP, username);
+        Page<AddressBook> result = addressbookController.getAddressbookList(filter, page, sizeP, username);
+        return ResponseEntity.ok().body(result);
+    }
+
+    @PostMapping("/page")
+    public ResponseEntity<Object> pageAddressBook(@RequestParam(defaultValue = "0") int page,
+                                                  @RequestParam(defaultValue = "5") int sizeP) {
+        String username = authenticationService.getUsername();
+        Page<AddressBook> result = addressbookController.pageAddressBook(page, sizeP, username);
         return ResponseEntity.ok().body(result);
     }
 

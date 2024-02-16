@@ -4,13 +4,13 @@ import com.twentyfive.twentyfivemodel.filterTicket.AddressBookFilter;
 import com.twentyfive.twentyfivemodel.filterTicket.AutoCompleteRes;
 import com.twentyfive.twentyfivemodel.models.ticketModels.AddressBook;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
-import org.springframework.data.domain.Page;
 import java.util.List;
 import java.util.Set;
 
-@FeignClient(name = "InternalAddressbookController", url = "http://tomcat-twentyfive-db:8091/twentyfive-db/addressbook")
+@FeignClient(name = "InternalAddressbookController", url = "${twentyfive.db.url}/addressbook")
 public interface InternalAddressbookController {
 
     @RequestMapping(method = RequestMethod.DELETE, value="/delete/{id}")
@@ -35,10 +35,15 @@ public interface InternalAddressbookController {
     AddressBook getByUsername(@RequestParam("username") String username);
 
     @RequestMapping(method = RequestMethod.POST , value="/list")
-    Page<AddressBook> getAdressbookList(@RequestBody AddressBookFilter filter,
+    Page<AddressBook> getAddressbookList(@RequestBody AddressBookFilter filter,
                                         @RequestParam(defaultValue = "0") int page,
                                         @RequestParam(defaultValue = "5") int size,
                                         @RequestParam("username") String username);
+
+    @RequestMapping(method = RequestMethod.POST , value="/page")
+    Page<AddressBook> pageAddressBook(@RequestParam(defaultValue = "0") int page,
+                                      @RequestParam(defaultValue = "5") int size,
+                                      @RequestParam("username") String username);
 
     @RequestMapping(method = RequestMethod.POST, value = "/get/autocomplete")
     Set<AutoCompleteRes> filterAutocomplete(@RequestParam("filterObject") String filterObject,

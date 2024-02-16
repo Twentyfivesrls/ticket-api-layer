@@ -3,19 +3,13 @@ package com.twentyfive.ticketapilayer.controllers;
 import com.twentyfive.authorizationflow.services.AuthenticationService;
 import com.twentyfive.ticketapilayer.clients.InternalEventController;
 import com.twentyfive.twentyfivemodel.filterTicket.AutoCompleteRes;
-import com.twentyfive.twentyfivemodel.filterTicket.EventFilter;
 import com.twentyfive.twentyfivemodel.models.ticketModels.Event;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-
-
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -26,26 +20,34 @@ import java.util.Set;
 @CrossOrigin(origins = "*")
 public class EventController {
 
-    @Autowired
-    private InternalEventController eventController;
+    private final InternalEventController eventController;
+    private final AuthenticationService authenticationService;
 
+    public EventController(InternalEventController eventController, AuthenticationService authenticationService) {
+        this.eventController = eventController;
+        this.authenticationService = authenticationService;
+    }
 
-    @Autowired
-    private AuthenticationService authenticationService;
+    //@PreAuthorize("hasRole('ROLE_single_realm_role')")
+    @PostMapping("/page")
+    public ResponseEntity<Page<Event>> filterEventList(@RequestParam(defaultValue = "0") int page,
+                                                       @RequestParam(defaultValue = "5") int size) {
+        String username = authenticationService.getUsername();
+        Page<Event> result = eventController.pageEvents(page, size, username);
+        return ResponseEntity.ok().body(result);
+    }
 
-    @PreAuthorize("hasRole('ROLE_single_realm_role')")
+    //@PreAuthorize("hasRole('ROLE_single_realm_role')")
     @PostMapping("/filter")
     public ResponseEntity<Page<Event>> filterEventList(@RequestBody Event event,
                                                        @RequestParam(defaultValue = "0") int page,
                                                        @RequestParam(defaultValue = "5") int size) {
-        System.out.println("size   :" + size);
         String username = authenticationService.getUsername();
         Page<Event> result = eventController.filterEventList(event, page, size, username);
-        System.out.println("RESULT   :" + result);
         return ResponseEntity.ok().body(result);
     }
 
-    @PreAuthorize("hasRole('ROLE_single_realm_role')")
+    //@PreAuthorize("hasRole('ROLE_single_realm_role')")
     @PostMapping("/filter/event/autocomplete")
     public ResponseEntity<Set<AutoCompleteRes>> filterEventAutocomplete(@RequestParam("filterObject") String filterObject){
 
@@ -55,8 +57,7 @@ public class EventController {
         return ResponseEntity.ok().body(result);
     }
 
-
-    @PreAuthorize("hasRole('ROLE_single_realm_role')")
+    //@PreAuthorize("hasRole('ROLE_single_realm_role')")
     @GetMapping("/list")
     public ResponseEntity<Object> getEventList() {
         String username = authenticationService.getUsername();
@@ -64,8 +65,7 @@ public class EventController {
         return ResponseEntity.ok().body(result);
     }
 
-
-    @PreAuthorize("hasRole('ROLE_single_realm_role')")
+    //@PreAuthorize("hasRole('ROLE_single_realm_role')")
     @PostMapping("/save")
     public ResponseEntity<Object> saveEvent(@RequestBody Event event) {
         String username = authenticationService.getUsername();
@@ -76,8 +76,7 @@ public class EventController {
         return ResponseEntity.ok().body(result);
     }
 
-
-    @PreAuthorize("hasRole('ROLE_single_realm_role')")
+    //@PreAuthorize("hasRole('ROLE_single_realm_role')")
     @GetMapping("/get/{id}")
     public ResponseEntity<Object> getEventById(@PathVariable String id) {
         String username = authenticationService.getUsername();
@@ -97,7 +96,7 @@ public class EventController {
                 .body(result);
     }
 
-    @PreAuthorize("hasRole('ROLE_single_realm_role')")
+    //@PreAuthorize("hasRole('ROLE_single_realm_role')")
     @PutMapping("/update/{id}/{status}")
     public ResponseEntity<Object> updateEvent(@PathVariable String id, @PathVariable Boolean status) {
         String username = authenticationService.getUsername();
@@ -105,7 +104,7 @@ public class EventController {
         return ResponseEntity.ok().body(result);
     }
 
-    @PreAuthorize("hasRole('ROLE_single_realm_role')")
+    //@PreAuthorize("hasRole('ROLE_single_realm_role')")
     @PutMapping("/update/{id}")
     public ResponseEntity<Object> updateEventById(@PathVariable String id, @RequestBody Event event) {
         String username = authenticationService.getUsername();
@@ -113,7 +112,7 @@ public class EventController {
         return ResponseEntity.ok().body(result);
     }
 
-    @PreAuthorize("hasRole('ROLE_single_realm_role')")
+    //@PreAuthorize("hasRole('ROLE_single_realm_role')")
     @GetMapping("/get/event/byFields")
     public ResponseEntity<Event> getEventByField(@RequestParam("name") String name,
                                                  @RequestParam("description") String description,
@@ -121,23 +120,13 @@ public class EventController {
                                                  @RequestParam("location") String location,
                                                  @RequestParam("enabled") Boolean enabled) {
         String username = authenticationService.getUsername();
-
-        String tmp = date;
-        System.out.println("DATE  :"+tmp);
-
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS");
-
         LocalDateTime dateTime = LocalDateTime.parse(date, formatter).atZone(ZoneOffset.UTC).toLocalDateTime();
-
-        System.out.println("DATE  FORMATTED:"+dateTime);
-
-
         Event result = eventController.getEventByField(name, description, dateTime, location, enabled);
-
         return ResponseEntity.ok().body(result);
     }
 
-    @PreAuthorize("hasRole('ROLE_single_realm_role')")
+    //@PreAuthorize("hasRole('ROLE_single_realm_role')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Event> deleteEvent(@PathVariable String id){
         String username = authenticationService.getUsername();
